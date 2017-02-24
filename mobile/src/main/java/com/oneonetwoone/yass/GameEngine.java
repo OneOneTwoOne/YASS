@@ -1,17 +1,18 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.engine;
 
 import android.graphics.Canvas;
 
+import com.oneonetwoone.yass.DrawThread;
+import com.oneonetwoone.yass.UpdateThread;
+
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by Hugh on 23/02/2017.
- */
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameEngine {
 
-    private List<GameObject> mGameObjects= new ArrayList<>();
+    private List<com.oneonetwoone.yass.engine.GameObject> mGameObjects= new ArrayList<>();
 
     private UpdateThread mUpdateThread;
     private DrawThread mDrawThread;
@@ -42,7 +43,7 @@ public class GameEngine {
         }
     }
 
-    public void addGameObject(final GameObject gameObject){
+    public void addGameObject(final com.oneonetwoone.yass.engine.GameObject gameObject){
         if(isRunning()){
             mObjectsToAdd.add(gameObject);
         }
@@ -52,7 +53,7 @@ public class GameEngine {
         mActivity.runOnUiThread(gameObject.mOnAddedRunnable);
     }
 
-    public void removeGameObject(final GameObject gameObject){
+    public void removeGameObject(final com.oneonetwoone.yass.engine.GameObject gameObject){
         mObjectsToRemove.add(gameObject);
         mActivity.runOnUiThread(gameObject.mOnRemovedRunnable);
     }
@@ -87,4 +88,11 @@ public class GameEngine {
     public void onDraw(Canvas canvas){
         mActivity.runOnUiThread(mDrawRunnable);
     }
-}
+
+
+
+
+
+
+
+

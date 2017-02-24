@@ -1,8 +1,6 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.engine;
 
-/**
- * Created by Hugh on 23/02/2017.
- */
+import com.oneonetwoone.yass.GameEngine;
 
 public abstract class GameObject {
     public abstract void startGame();
