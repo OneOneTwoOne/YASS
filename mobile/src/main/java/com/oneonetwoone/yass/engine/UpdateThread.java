@@ -2,6 +2,7 @@ package com.oneonetwoone.yass.engine;
 
 
 public class UpdateThread extends Thread {
+    boolean mPauseGame, mGameIsRunning;
     @Override
     public void run() {
         long previousTimeMillis;
@@ -41,7 +42,7 @@ public class UpdateThread extends Thread {
     public void start(){
         mGameIsRunning=true;
         mPauseGame=false;
-        stuper.start();
+        super.start();
     }
 
     public void stopGame(){

@@ -1,14 +1,12 @@
 package com.oneonetwoone.yass.engine;
 
+import android.app.Activity;
 import android.graphics.Canvas;
 
-import com.oneonetwoone.yass.DrawThread;
-import com.oneonetwoone.yass.UpdateThread;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 public class GameEngine {
 
@@ -16,11 +14,12 @@ public class GameEngine {
 
     private UpdateThread mUpdateThread;
     private DrawThread mDrawThread;
+    private Activity mActivity;
 
     public void startGame(){
         stopGame();//Stops game if already running
 
-        int numGameOjects = mGameObjects.size();
+        int numGameObjects = mGameObjects.size();
         for(int i=0; i<numGameObjects; i++){
             mGameObjects.get(i).startGame();
         }
@@ -53,7 +52,7 @@ public class GameEngine {
         mActivity.runOnUiThread(gameObject.mOnAddedRunnable);
     }
 
-    public void removeGameObject(final com.oneonetwoone.yass.engine.GameObject gameObject){
+    public void removeGameObject(final GameObject gameObject){
         mObjectsToRemove.add(gameObject);
         mActivity.runOnUiThread(gameObject.mOnRemovedRunnable);
     }
