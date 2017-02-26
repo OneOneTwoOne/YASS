@@ -1,6 +1,5 @@
 package com.oneonetwoone.yass.engine;
 
-import com.oneonetwoone.yass.GameEngine;
 
 public abstract class GameObject {
     public abstract void startGame();

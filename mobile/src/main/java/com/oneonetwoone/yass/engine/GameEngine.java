@@ -14,7 +14,7 @@ public class GameEngine {
 
     private UpdateThread mUpdateThread;
     private DrawThread mDrawThread;
-    private Activity mActivity;
+
 
     public void startGame(){
         stopGame();//Stops game if already running
@@ -88,7 +88,10 @@ public class GameEngine {
         mActivity.runOnUiThread(mDrawRunnable);
     }
 
-
+    public boolean isRunning(){
+    return mUpdateThread != null&& mUpdateThread.isGameRunning();
+    }
+}
 
 
 
