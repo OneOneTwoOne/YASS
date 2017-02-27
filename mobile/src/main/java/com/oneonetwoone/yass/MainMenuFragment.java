@@ -1,8 +1,11 @@
 package com.oneonetwoone.yass;
 
+import android.support.v4.app.Fragment;
+
 import com.oneonetwoone.yass.counter.GameFragment;
 
-public class MainMenuFragment extends YassBaseFragment {
+public class  MainMenuFragment extends YassBaseFragment {
+    private static final String TAG_FRAGMENT="Tag";
     public void startGame(){
         getFragmentManager()
                 .beginTransaction()

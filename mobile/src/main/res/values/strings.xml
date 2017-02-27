@@ -9,5 +9,5 @@
     <string name="resume">Resume</string>
     <string name="pause_dialog_title">Pause</string>
     <string name="pause_dialog_message">Game is paused, take your time.</string>
-
+    <string name="hello_world">hello World!</string>
 </resources>

@@ -1,12 +1,18 @@
 package com.oneonetwoone.yass.engine;
 
 
+import android.content.Context;
+
 import java.util.concurrent.locks.Lock;
 
 public class UpdateThread extends Thread {
     boolean mPauseGame, mGameIsRunning;
     Lock mLock;
     GameEngine mGameEngine;
+
+    UpdateThread(GameEngine gameEngine){
+        mGameEngine=gameEngine;
+    }
     @Override
     public void run() {
         long previousTimeMillis;

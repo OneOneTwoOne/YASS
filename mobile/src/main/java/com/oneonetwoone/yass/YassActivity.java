@@ -10,7 +10,7 @@ import android.view.View;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class YassActivity extends AppCompatActivity {
-    private static final String TAG_FRAGMENT="oo";
+    private static final String TAG_FRAGMENT="Tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,7 @@
 package com.oneonetwoone.yass.engine;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Canvas;
 
 
@@ -18,6 +19,9 @@ public class GameEngine {
     private Activity mActivity;
 
 
+    public GameEngine(Activity activity){
+        mActivity=activity;
+    };
     public void startGame(){
         stopGame();//Stops game if already running
 

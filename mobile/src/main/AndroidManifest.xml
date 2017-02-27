@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.oneonetwoone.yass"
           xmlns:android="http://schemas.android.com/apk/res/android">
-    <intent-filet>
+    <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
-    </intent-filet>
+    </intent-filter>
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:screenOrientation="sensorLandscape"
-            android:name=".YassActivity"
+            android:name="com.oneonetwoone.yass.YassActivity"
             android:label="@string/title_activity_yass"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

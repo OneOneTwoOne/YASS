@@ -1,5 +1,7 @@
 package com.oneonetwoone.yass.engine;
 
+import android.graphics.Canvas;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,13 +11,14 @@ public class DrawThread {
     private GameEngine mGameEngine;
     private Timer mTimer;
 
+    DrawThread(GameEngine gameEngine){mGameEngine=gameEngine;}
     public void start(){
         stopGame();
         mTimer=new Timer();
         mTimer.schedule(new TimerTask(){
             @Override
             public void run(){
-                mGameEngine.onDraw();
+                mGameEngine.onDraw(new Canvas());
             }
         },0,TIME_BETWEEN_DRAWS);
     }
