@@ -10,10 +10,12 @@ import java.util.List;
 
 public class GameEngine {
 
-    private List<com.oneonetwoone.yass.engine.GameObject> mGameObjects= new ArrayList<>();
-
+    private List<GameObject> mGameObjects= new ArrayList<>();
+    private List<GameObject> mObjectsToAdd= new ArrayList<>();
+    private List<GameObject> mObjectsToRemove= new ArrayList<>();
     private UpdateThread mUpdateThread;
     private DrawThread mDrawThread;
+    private Activity mActivity;
 
 
     public void startGame(){
@@ -42,6 +44,24 @@ public class GameEngine {
         }
     }
 
+    public void pauseGame(){
+        if (mUpdateThread != null){
+            mUpdateThread.pauseGame();
+        }
+        if(mDrawThread != null){
+            mDrawThread.pauseGame();
+        }
+    }
+
+    public void resumeGame(){
+        if (mUpdateThread != null){
+            mUpdateThread.resumeGame();
+        }
+        if(mDrawThread != null){
+            mDrawThread.resumeGame();
+        }
+    }
+
     public void addGameObject(final com.oneonetwoone.yass.engine.GameObject gameObject){
         if(isRunning()){
             mObjectsToAdd.add(gameObject);
@@ -57,7 +77,7 @@ public class GameEngine {
         mActivity.runOnUiThread(gameObject.mOnRemovedRunnable);
     }
 
-    public void onUpdate (long elaspsedMillis){
+    public void onUpdate (long elapsedMillis){
         int numGameObjects = mGameObjects.size();
         for(int i=0; i<numGameObjects; i++){
             mGameObjects.get(i).onUpdate(elapsedMillis,this);
@@ -67,7 +87,7 @@ public class GameEngine {
                 mGameObjects.remove(mObjectsToRemove.remove(0));
             }
             while(!mObjectsToRemove.isEmpty()){
-                mGameObjects.add(mObjectsToadd.remove(0));
+                mGameObjects.add(mObjectsToAdd.remove(0));
             }
         }
     }

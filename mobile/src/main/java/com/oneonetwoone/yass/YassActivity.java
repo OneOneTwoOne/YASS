@@ -10,12 +10,23 @@ import android.view.View;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class YassActivity extends AppCompatActivity {
+    private static final String TAG_FRAGMENT="oo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yass);
-
+        if (savedInstanceState==null){
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new MainMenuFragment(), TAG_FRAGMENT)
+                    .commit();
+        }
     }
-
+    @Override
+    public void onBackPressed(){
+        final YassFragment fragment = (YassFragment) getFragmentManager().findFragmentByTag(TAG_FRAGMENT);
+        if(!fragment.onBackPressed()){
+            super.onBackPressed();
+        }
+    }
 }

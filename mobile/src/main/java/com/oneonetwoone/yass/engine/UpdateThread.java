@@ -1,8 +1,12 @@
 package com.oneonetwoone.yass.engine;
 
 
+import java.util.concurrent.locks.Lock;
+
 public class UpdateThread extends Thread {
     boolean mPauseGame, mGameIsRunning;
+    Lock mLock;
+    GameEngine mGameEngine;
     @Override
     public void run() {
         long previousTimeMillis;
@@ -30,6 +34,10 @@ public class UpdateThread extends Thread {
         }
     }
 
+    public void pauseGame(){
+        mPauseGame=true;
+    }
+
     public void resumeGame(){
         if(mPauseGame==true){
             mPauseGame=false;
@@ -50,4 +58,5 @@ public class UpdateThread extends Thread {
         resumeGame();
     }
 
+    public boolean isGameRunning(){return mGameIsRunning;}
 }

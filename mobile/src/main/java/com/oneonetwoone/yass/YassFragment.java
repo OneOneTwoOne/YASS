@@ -12,6 +12,7 @@ import com.oneonetwoone.yass.engine.GameEngine;
 import static android.R.attr.button;
 
 public class YassFragment extends Fragment {
+    private GameEngine mGameEngine;
 
     public YassFragment() {
     }
@@ -32,46 +33,5 @@ public class YassFragment extends Fragment {
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v){
-        if(v.getId() == R.id.btn_play_pause){
-            playOrPause();
-        }
-        if(v.getId() == R.id.btn_start_stop){
-            startOrStop();
-        }
-    }
 
-    private void playOrPause(){
-        Button button = (Button) getView().findViewById(R.id.btn_play_pause);
-        if(mGameEngine.isPaused()){
-            mGameEngine.resumeGame();
-            button.setText(R.string.pause);
-        }
-        else{
-            mGameEngine.pauseGame();
-            button.setText(R.string.resume);
-        }
-    }
-
-    public boolean isPaused(){
-        return mUpdateThread != null && mUpdateThread.isGamePaused();
-    }
-
-    private void startOrStop(){
-        Button button=(Button)getView().findViewById(R.id.btn_play_pause);
-    }
-    Button playPauseButton = (Button) getView().findViewById(R.id.btn_play_pause);
-
-    if(mGameEngine.isRunning()){
-        mGameEngine.stopGame();
-        button.setText(R.string.start);
-        playPauseButton.setEnable(true);
-    }
-    else{
-        mGameEngine.startGame();
-        button.setText(R.string.stop);
-        playPauseButton.setEnabled(true);
-        playPauseButton.setText(R.string.pause);
-    }
 }

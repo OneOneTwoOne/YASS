@@ -6,6 +6,8 @@ import java.util.TimerTask;
 public class DrawThread {
     private static int EXPECTED_FPS=30;
     private static final long TIME_BETWEEN_DRAWS=1000/EXPECTED_FPS;
+    private GameEngine mGameEngine;
+    private Timer mTimer;
 
     public void start(){
         stopGame();

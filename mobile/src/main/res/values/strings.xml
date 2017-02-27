@@ -2,4 +2,12 @@
     <string name="app_name">YASS</string>
     <string name="title_activity_yass">YassActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="start">Start</string>
+    <string name="game_title">YASS-Yet Another Space Shooter</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="resume">Resume</string>
+    <string name="pause_dialog_title">Pause</string>
+    <string name="pause_dialog_message">Game is paused, take your time.</string>
+
 </resources>

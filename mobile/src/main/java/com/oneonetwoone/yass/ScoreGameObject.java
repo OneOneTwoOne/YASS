@@ -1,4 +1,4 @@
-package com.oneonetwoone.yass.counter;
+package com.oneonetwoone.yass;
 
 import android.view.View;
 import android.widget.TextView;
