@@ -29,4 +29,8 @@ public class YassActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+    public void navigateBack(){
+        super.onBackPressed();
+    }
 }

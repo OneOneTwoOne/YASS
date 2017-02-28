@@ -1,12 +1,15 @@
 package com.oneonetwoone.yass.counter;
 
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.ScoreGameObject;
+import com.oneonetwoone.yass.YassActivity;
 import com.oneonetwoone.yass.YassBaseFragment;
 import com.oneonetwoone.yass.engine.GameEngine;
 
@@ -20,14 +23,11 @@ public class GameFragment extends YassBaseFragment {
                     new ScoreGameObject(view, R.id.txt_score));
             view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
             mGameEngine.startGame();
+
+
     }
 
-    @Override
-    public void onClick(View v){
-        if(v.getId()==R.id.btn_play_pause){
-            pauseGameAndShowPauseDialog();
-        }
-    }
+
 
     private void pauseGameAndShowPauseDialog(){
         mGameEngine.pauseGame();
@@ -47,7 +47,7 @@ public class GameFragment extends YassBaseFragment {
                             public void onClick(DialogInterface dialog, int which){
                                 dialog.dismiss();
                                 mGameEngine.stopGame();
-                                ((MainActivity)getActivity()).navigateBack();
+                                ((YassActivity)getActivity()).navigateBack();
                             }
                         })
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -58,10 +58,6 @@ public class GameFragment extends YassBaseFragment {
                 })
                 .create()
                 .show();
-    }
-
-    public void navigateBack(){
-        super.onBackPressed();
     }
 
     @Override
