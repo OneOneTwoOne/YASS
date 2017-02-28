@@ -15,7 +15,7 @@ public class YassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yass);
+        setContentView(R.layout.activity_main);
         if (savedInstanceState==null){
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new MainMenuFragment(), TAG_FRAGMENT)
@@ -24,7 +24,7 @@ public class YassActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-        final YassFragment fragment = (YassFragment) getFragmentManager().findFragmentByTag(TAG_FRAGMENT);
+        final YassBaseFragment fragment = (YassBaseFragment) getFragmentManager().findFragmentByTag(TAG_FRAGMENT);
         if(!fragment.onBackPressed()){
             super.onBackPressed();
         }
