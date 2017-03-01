@@ -4,10 +4,11 @@ package com.oneonetwoone.yass.engine;
 import android.content.Context;
 
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class UpdateThread extends Thread {
     boolean mPauseGame, mGameIsRunning;
-    Lock mLock;
+    Lock mLock=new ReentrantLock();
     GameEngine mGameEngine;
 
     UpdateThread(GameEngine gameEngine){

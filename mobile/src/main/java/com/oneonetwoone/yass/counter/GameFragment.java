@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.oneonetwoone.yass.InputController;
+import com.oneonetwoone.yass.Player;
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.ScoreGameObject;
 import com.oneonetwoone.yass.YassActivity;
@@ -27,9 +29,9 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
     public void onViewCreated(View view, Bundle savedInstanceState){
             super.onViewCreated(view, savedInstanceState);
             mGameEngine=new GameEngine(getActivity());
-            mGameEngine.addGameObject(
-                    new ScoreGameObject(view, R.id.txt_score));
             view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
+            mGameEngine.setInputController(new InputController());
+            mGameEngine.addGameObject(new Player(getView()));
             mGameEngine.startGame();
     }
     @Override

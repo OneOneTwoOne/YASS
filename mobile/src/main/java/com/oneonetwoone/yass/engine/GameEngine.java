@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 
 
+import com.oneonetwoone.yass.InputController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class GameEngine {
     private UpdateThread mUpdateThread;
     private DrawThread mDrawThread;
     private Activity mActivity;
+    public InputController mInputController;
 
 
     public GameEngine(Activity activity){
@@ -114,6 +117,10 @@ public class GameEngine {
 
     public boolean isRunning(){
     return mUpdateThread != null&& mUpdateThread.isGameRunning();
+    }
+
+    public void setInputController(InputController controller){
+        mInputController=controller;
     }
 }
 
