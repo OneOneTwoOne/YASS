@@ -1,18 +1,16 @@
 package com.oneonetwoone.yass.counter;
 
-
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
+import android.view.ViewTreeObserver;
 import com.oneonetwoone.yass.InputController;
 import com.oneonetwoone.yass.Player;
 import com.oneonetwoone.yass.R;
-import com.oneonetwoone.yass.ScoreGameObject;
 import com.oneonetwoone.yass.YassActivity;
 import com.oneonetwoone.yass.YassBaseFragment;
 import com.oneonetwoone.yass.engine.GameEngine;
@@ -27,12 +25,25 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-            super.onViewCreated(view, savedInstanceState);
-            mGameEngine=new GameEngine(getActivity());
-            view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
-            mGameEngine.setInputController(new InputController());
-            mGameEngine.addGameObject(new Player(getView()));
-            mGameEngine.startGame();
+        super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
+        final ViewTreeObserver obs = view.getViewTreeObserver();
+        obs.addOnGlobalLayoutListener(new
+            ViewTreeObserver.OnGlobalLayoutListener(){
+                @Override
+                public void onGlobalLayout () {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                        obs.removeGlobalOnLayoutListener(this);
+                    } else {
+                        obs.removeOnGlobalLayoutListener(this);
+                    }
+                    mGameEngine = new GameEngine(getActivity());
+                    mGameEngine.setInputController(new
+                            InputController());
+                    mGameEngine.addGameObject(new Player(getView()));
+                    mGameEngine.startGame();
+                }
+        });
     }
     @Override
     public void onClick(View v) {

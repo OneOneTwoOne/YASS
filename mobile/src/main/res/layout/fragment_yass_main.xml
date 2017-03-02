@@ -10,10 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
-        android:id="@+id/txt_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world"/>
+        android:id="@+id/player"
+        />
 
     <Button
         android:id="@+id/btn_play_pause"
