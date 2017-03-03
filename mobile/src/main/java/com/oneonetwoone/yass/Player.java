@@ -67,5 +67,7 @@ public class Player extends GameObject {
     @Override
     public void onDraw(){
         mTextView.setText("["+ mPositionX +","+mPositionY+"]");
+        mShip.setTranslationX((int) mPositionX);
+        mShip.setTranslationY((int) mPositionY);
     }
 }
