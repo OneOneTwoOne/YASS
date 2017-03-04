@@ -19,21 +19,23 @@ public class Player extends GameObject {
     public double mSpeedFactor;
     public TextView mTextView;
     public ImageView mShip;
+    public View mView;
     public List<Bullet> mBullets;
-    public int INITIAL_BULLET_POOL_AMOUNT=0;
+    public int INITIAL_BULLET_POOL_AMOUNT=6;
     public long TIME_BETWEEN_BULLETS;
     double mPixelFactor;
     long mTimeSinceLastFire;
 
     public Player(final View view){
+        mView=view;
         mBullets = new ArrayList<>();
-        mPixelFactor= view.getHeight() /400d;
+        mPixelFactor= mView.getHeight() /400d;
         mSpeedFactor=mPixelFactor*100d/1000d;
-        mMaxX=view.getWidth()-view.getPaddingRight()-view.getPaddingLeft();
-        mMaxY=view.getHeight() - view.getPaddingTop()-view.getPaddingBottom();
-        mTextView=(TextView) view.findViewById(R.id.player);
-        mShip= new ImageView(view.getContext());
-        Drawable shipDrawable = view.getContext().getResources().getDrawable(R.drawable.ship);
+        mMaxX=mView.getWidth()-mView.getPaddingRight()-mView.getPaddingLeft();
+        mMaxY=mView.getHeight() - mView.getPaddingTop()-mView.getPaddingBottom();
+        mTextView=(TextView) mView.findViewById(R.id.player);
+        mShip= new ImageView(mView.getContext());
+        Drawable shipDrawable = mView.getContext().getResources().getDrawable(R.drawable.ship);
         mShip.setLayoutParams(new ViewGroup.LayoutParams(
                 (int) (shipDrawable.getIntrinsicWidth()*mPixelFactor),
                 (int) (shipDrawable.getIntrinsicHeight()*mPixelFactor)));
@@ -42,7 +44,7 @@ public class Player extends GameObject {
         mMaxX -= (shipDrawable.getIntrinsicWidth()*mPixelFactor);
         mMaxY -= (shipDrawable.getIntrinsicHeight()*mPixelFactor);
 
-        ((FrameLayout) view).addView(mShip);
+        ((FrameLayout) mView).addView(mShip);
     }
 
     @Override
@@ -80,7 +82,7 @@ public class Player extends GameObject {
             if (b == null){
                 return;
             }
-            b.init(mPositionX + mShip.getWidth()/2, mPositionY);
+            b.init(this, mPositionX + mShip.getWidth()/2, mPositionY); //figure this line out
             gameEngine.addGameObject(b);
             mTimeSinceLastFire = 0;
         }
@@ -88,8 +90,6 @@ public class Player extends GameObject {
             mTimeSinceLastFire+=elapsedMillis;
         }
     }
-
-    public void updatePosition(){}
 
     @Override
     public void onDraw(){
@@ -100,7 +100,7 @@ public class Player extends GameObject {
 
     private void initBulletPool(){
         for (int i=0; i<INITIAL_BULLET_POOL_AMOUNT; i++){
-            mBullets.add(new Bullet(mPixelFactor));
+            mBullets.add(new Bullet(mView, mPixelFactor));
         }
     }
 
@@ -111,7 +111,10 @@ public class Player extends GameObject {
         return mBullets.remove(0);
     }
 
-    private void releaseBullet(Bullet b){
+    public void releaseBullet(Bullet b){
         mBullets.add(b);
     }
+
+    public void updatePosition(long ellapsedMillis, InputController inputController){}
+
 }
