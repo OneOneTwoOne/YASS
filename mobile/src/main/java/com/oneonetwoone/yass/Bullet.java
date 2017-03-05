@@ -20,7 +20,7 @@ public class Bullet extends GameObject {
     public Bullet(View view, double pixelFactor){
         Context c = view.getContext();
 
-        mSpeedFactor= pixelFactor*-300d/1000d;
+        mSpeedFactor= pixelFactor* -300d/1000d;
 
         mImageView= new ImageView(c);
         Drawable bulletDrawable=c.getResources().getDrawable(R.drawable.ship);

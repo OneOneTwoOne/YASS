@@ -1,14 +1,15 @@
 package com.oneonetwoone.yass.counter;
 
+import android.view.View;
+
+import com.oneonetwoone.yass.BasicInputController;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import com.oneonetwoone.yass.InputController;
 import com.oneonetwoone.yass.Player;
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.YassActivity;
@@ -38,8 +39,7 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
                         obs.removeOnGlobalLayoutListener(this);
                     }
                     mGameEngine = new GameEngine(getActivity());
-                    mGameEngine.setInputController(new
-                            InputController());
+                    mGameEngine.setInputController(new BasicInputController(getView()));
                     mGameEngine.addGameObject(new Player(getView()));
                     mGameEngine.startGame();
                 }

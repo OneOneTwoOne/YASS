@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
-    android:id="@+id/content_yass"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
-
+    tools:context="com.oneonetwoone.yass.counter.GameFragment">
     <TextView
         android:layout_gravity="top|left"
+        android:id="@+id/txt_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/player"
-        />
-
+        android:text="@string/hello_world" />
     <Button
         android:layout_gravity="top|right"
         android:id="@+id/btn_play_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pause"/>
-
-
+        android:text="@string/pause" />
+    Chapter 2
+    [ 65 ]
+    <include layout="@layout/view_keypad" />
 </FrameLayout>

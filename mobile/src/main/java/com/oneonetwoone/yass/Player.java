@@ -22,7 +22,7 @@ public class Player extends GameObject {
     public View mView;
     public List<Bullet> mBullets;
     public int INITIAL_BULLET_POOL_AMOUNT=6;
-    public long TIME_BETWEEN_BULLETS;
+    public long TIME_BETWEEN_BULLETS=300;
     double mPixelFactor;
     long mTimeSinceLastFire;
 
@@ -33,7 +33,7 @@ public class Player extends GameObject {
         mSpeedFactor=mPixelFactor*100d/1000d;
         mMaxX=mView.getWidth()-mView.getPaddingRight()-mView.getPaddingLeft();
         mMaxY=mView.getHeight() - mView.getPaddingTop()-mView.getPaddingBottom();
-        mTextView=(TextView) mView.findViewById(R.id.player);
+        mTextView=(TextView) mView.findViewById(R.id.txt_score);
         mShip= new ImageView(mView.getContext());
         Drawable shipDrawable = mView.getContext().getResources().getDrawable(R.drawable.ship);
         mShip.setLayoutParams(new ViewGroup.LayoutParams(
@@ -45,12 +45,14 @@ public class Player extends GameObject {
         mMaxY -= (shipDrawable.getIntrinsicHeight()*mPixelFactor);
 
         ((FrameLayout) mView).addView(mShip);
+        initBulletPool();
     }
 
     @Override
     public void startGame(){
         mPositionX = mMaxX/2;
         mPositionY = mMaxY/2;
+
     }
 
     @Override
