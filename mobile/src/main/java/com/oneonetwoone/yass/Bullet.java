@@ -2,7 +2,6 @@ package com.oneonetwoone.yass;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
 
-import static android.content.ContentValues.TAG;
 
 
 public class Bullet extends GameObject {
