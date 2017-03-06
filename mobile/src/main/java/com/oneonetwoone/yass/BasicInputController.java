@@ -3,10 +3,6 @@ package com.oneonetwoone.yass;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * Created by Home on 05/03/2017.
- */
-
 public class BasicInputController extends InputController implements View.OnTouchListener {
 
     public BasicInputController(View view){

@@ -2,6 +2,7 @@ package com.oneonetwoone.yass;
 
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -14,9 +15,11 @@ import com.oneonetwoone.yass.engine.GameObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
+
 public class Player extends GameObject {
-    public double mPositionX,mPositionY, mMaxX, mMaxY;
-    public double mSpeedFactor;
+    private double mPositionX,mPositionY, mMaxX, mMaxY;
+    private double mSpeedFactor;
     public TextView mTextView;
     public ImageView mShip;
     public View mView;
@@ -61,7 +64,7 @@ public class Player extends GameObject {
         checkFiring(elapsedMillis, gameEngine);
         InputController inputController = gameEngine.mInputController;
         mPositionX +=
-                mSpeedFactor*inputController.mHorizontalFactor*elapsedMillis;
+                mSpeedFactor*(inputController.mHorizontalFactor*elapsedMillis);
         if(mPositionX<0){
             mPositionX=0;
         }
@@ -69,7 +72,7 @@ public class Player extends GameObject {
             mPositionX=mMaxX;
         }
         mPositionY+=
-                mSpeedFactor*inputController.mVerticalFactor*elapsedMillis;
+                mSpeedFactor*(inputController.mVerticalFactor*elapsedMillis);
         if(mPositionY<0){
             mPositionY=0;
         }
@@ -84,7 +87,7 @@ public class Player extends GameObject {
             if (b == null){
                 return;
             }
-            b.init(this, mPositionX + mShip.getWidth()/2, mPositionY); //figure this line out
+            b.init(this, mPositionX + mShip.getWidth()/2, mPositionY); //put bullet at top of ship, halfway thru width
             gameEngine.addGameObject(b);
             mTimeSinceLastFire = 0;
         }

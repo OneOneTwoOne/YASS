@@ -2,6 +2,7 @@ package com.oneonetwoone.yass;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -10,20 +11,21 @@ import android.widget.ImageView;
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
 
+import static android.content.ContentValues.TAG;
 
 
 public class Bullet extends GameObject {
     public ImageView mImageView;
-    public double mSpeedFactor, mImageHeight, mImageWidth, mPositionX, mPositionY;
+    private double mSpeedFactor, mImageHeight, mImageWidth, mPositionX, mPositionY;
     public Player mParent;
 
     public Bullet(View view, double pixelFactor){
         Context c = view.getContext();
 
-        mSpeedFactor= pixelFactor* -300d/1000d;
+        mSpeedFactor= pixelFactor * -300d / 1000d;
 
         mImageView= new ImageView(c);
-        Drawable bulletDrawable=c.getResources().getDrawable(R.drawable.ship);
+        Drawable bulletDrawable=c.getResources().getDrawable(R.drawable.bullet);
 
         mImageHeight= bulletDrawable.getIntrinsicHeight()*pixelFactor;
         mImageWidth= bulletDrawable.getIntrinsicWidth()*pixelFactor;
@@ -35,8 +37,8 @@ public class Bullet extends GameObject {
     }
 
     public void init(Player parent, double positionX, double positionY){
-        mPositionX= positionX-mImageWidth/2;
-        mPositionY=positionY-mImageHeight/2;
+        mPositionX= positionX-(mImageWidth/2);
+        mPositionY=positionY-(mImageHeight/2);
         mParent = parent;
     }
 
@@ -54,7 +56,7 @@ public class Bullet extends GameObject {
     public void startGame(){}
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){
-        mPositionY += mSpeedFactor * elapsedMillis;
+        mPositionY += (mSpeedFactor * elapsedMillis);
         if(mPositionY < -mImageHeight){
             gameEngine.removeGameObject(this);
             mParent.releaseBullet(this);
@@ -62,8 +64,9 @@ public class Bullet extends GameObject {
     }
     @Override
     public void onDraw(){
-        mImageView.setTranslationX((int) mPositionX);
-        mImageView.setTranslationY((int) mPositionY);
+
+       mImageView.setTranslationX((int) mPositionX);
+       mImageView.setTranslationY((int) mPositionY);
     }
 
 

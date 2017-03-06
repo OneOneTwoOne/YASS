@@ -3,12 +3,15 @@ package com.oneonetwoone.yass.engine;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.Log;
 
 
 import com.oneonetwoone.yass.InputController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 
 public class GameEngine {
@@ -24,10 +27,9 @@ public class GameEngine {
 
     public GameEngine(Activity activity){
         mActivity=activity;
-    };
+    }
     public void startGame(){
         stopGame();//Stops game if already running
-
         int numGameObjects = mGameObjects.size();
         for(int i=0; i<numGameObjects; i++){
             mGameObjects.get(i).startGame();
@@ -71,9 +73,11 @@ public class GameEngine {
 
     public void addGameObject(final com.oneonetwoone.yass.engine.GameObject gameObject){
         if(isRunning()){
+
             mObjectsToAdd.add(gameObject);
         }
         else{
+
             mGameObjects.add(gameObject);
         }
         mActivity.runOnUiThread(gameObject.mOnAddedRunnable);
@@ -93,7 +97,8 @@ public class GameEngine {
             while(!mObjectsToRemove.isEmpty()){
                 mGameObjects.remove(mObjectsToRemove.remove(0));
             }
-            while(!mObjectsToRemove.isEmpty()){
+            while(!mObjectsToAdd.isEmpty()){
+
                 mGameObjects.add(mObjectsToAdd.remove(0));
             }
         }
@@ -106,6 +111,7 @@ public class GameEngine {
                 int numGameObjects = mGameObjects.size();
                 for (int i = 0; i < numGameObjects; i++) {
                     mGameObjects.get(i).onDraw();
+
                 }
             }
         }
