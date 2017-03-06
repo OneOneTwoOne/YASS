@@ -7,8 +7,7 @@ import android.view.View;
  */
 
 public class VirtualJoystickInputController extends InputController {
-    private double mMaxDistance;
-    public boolean mIsFiring;
+    public double mMaxDistance;
 
     public VirtualJoystickInputController(View view){
         view.findViewById(R.id.vjoystick_main).setOnTouchListener(new VJoystickTouchListener());
