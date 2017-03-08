@@ -38,6 +38,9 @@ public class GameEngine {
         //starts drawThread
         mDrawThread = new DrawThread(this);
         mDrawThread.start();
+        if(mInputController!=null){
+            mInputController.onStart();
+        }
     }
 
     public void stopGame(){
@@ -46,6 +49,9 @@ public class GameEngine {
         }
         if(mDrawThread != null){
             mDrawThread.stopGame();
+        }
+        if(mInputController!=null){
+            mInputController.onStop();
         }
     }
 
@@ -56,6 +62,9 @@ public class GameEngine {
         if(mDrawThread != null){
             mDrawThread.pauseGame();
         }
+        if(mInputController!=null){
+            mInputController.onPause();
+        }
     }
 
     public void resumeGame(){
@@ -64,6 +73,9 @@ public class GameEngine {
         }
         if(mDrawThread != null){
             mDrawThread.resumeGame();
+        }
+        if(mInputController!=null){
+            mInputController.onResume();
         }
     }
 

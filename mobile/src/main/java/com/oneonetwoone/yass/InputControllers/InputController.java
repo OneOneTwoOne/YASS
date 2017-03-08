@@ -1,6 +1,6 @@
 package com.oneonetwoone.yass.InputControllers;
 
-public class InputController {
+public class InputController{
     public double mHorizontalFactor;
     public double mVerticalFactor;
 
@@ -21,4 +21,5 @@ public class InputController {
     public void onResume(){
 
     }
+
 }
