@@ -2,17 +2,17 @@ package com.oneonetwoone.yass;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+import com.oneonetwoone.yass.InputControllers.GamepadControllerListener;
+
 
 public class YassActivity extends AppCompatActivity {
     private static final String TAG_FRAGMENT="Tag";
+    public GamepadControllerListener mGamepadControllerListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,4 +58,31 @@ public class YassActivity extends AppCompatActivity {
     public void navigateBack(){
         super.onBackPressed();
     }
+
+    public void setGamepadControllerListener(GamepadControllerListener listener){
+        mGamepadControllerListener=listener;
+    }
+
+    @Override
+    public boolean dispatchGenericMotionEvent (MotionEvent event){
+        if (mGamepadControllerListener !=null){
+            if (mGamepadControllerListener.dispatchGenericMotionEvent(event)){
+                return true;
+            }
+        }
+        return super.dispatchGenericMotionEvent(event);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event){
+        if (mGamepadControllerListener != null){
+            if(mGamepadControllerListener.dispatchKeyEvent(event)){
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+
+
 }

@@ -1,4 +1,4 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.InputControllers;
 
 public class InputController {
     public double mHorizontalFactor;

@@ -1,7 +1,9 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.InputControllers;
 
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.oneonetwoone.yass.R;
 
 public class VirtualJoystickInputController extends InputController {
     public double mMaxDistance;
@@ -32,9 +34,9 @@ public class VirtualJoystickInputController extends InputController {
                 } else if (mHorizontalFactor < -1) {
                     mHorizontalFactor = -1;
                 }
-                mVerticalFactor = (event.getY(0)-mStartingPositionY)/mMaxDistance;
-                if (mVerticalFactor < -1) {
-                    mVerticalFactor = -1;
+                mVerticalFactor = (event.getY(0) - mStartingPositionY)/mMaxDistance;
+                if (mVerticalFactor > 1) {
+                    mVerticalFactor = 1;
                 }
                 else if (mVerticalFactor < -1){
                     mVerticalFactor=-1;

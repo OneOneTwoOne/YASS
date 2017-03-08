@@ -1,5 +1,6 @@
 package com.oneonetwoone.yass.counter;
 
+import android.hardware.input.InputManager.InputDeviceListener;
 import android.view.View;
 
 import android.content.DialogInterface;
@@ -9,14 +10,15 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+
+import com.oneonetwoone.yass.InputControllers.CompositeInputController;
 import com.oneonetwoone.yass.Player;
 import com.oneonetwoone.yass.R;
-import com.oneonetwoone.yass.VirtualJoystickInputController;
 import com.oneonetwoone.yass.YassActivity;
 import com.oneonetwoone.yass.YassBaseFragment;
 import com.oneonetwoone.yass.engine.GameEngine;
 
-public class GameFragment extends YassBaseFragment implements View.OnClickListener{
+public class GameFragment extends YassBaseFragment implements View.OnClickListener, InputDeviceListener {
     private GameEngine mGameEngine;
 
     @Override
@@ -39,7 +41,7 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
                         obs.removeOnGlobalLayoutListener(this);
                     }
                     mGameEngine = new GameEngine(getActivity());
-                    mGameEngine.setInputController(new VirtualJoystickInputController(getView()));
+                    mGameEngine.setInputController(new CompositeInputController(getView(), (YassActivity) getActivity()));
                     mGameEngine.addGameObject(new Player(getView()));
                     mGameEngine.startGame();
                 }
@@ -85,5 +87,19 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
             return true;
         }
         return false;
+    }
+    @Override
+    public void onInputDeviceChanged(int deviceId) {
+
+    }
+    @Override
+    public void onInputDeviceAdded(int deviceId) {
+
+    }
+    @Override
+    public void onInputDeviceRemoved(int deviceId) {
+        if (!mGameEngine.isRunning()) {
+            pauseGameAndShowPauseDialog();
+        }
     }
 }

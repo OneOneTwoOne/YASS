@@ -1,17 +1,13 @@
 package com.oneonetwoone.yass.engine;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Canvas;
-import android.util.Log;
 
 
-import com.oneonetwoone.yass.InputController;
+import com.oneonetwoone.yass.InputControllers.InputController;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 
 public class GameEngine {

@@ -1,9 +1,13 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.InputControllers;
 
+import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.oneonetwoone.yass.R;
+
 public class BasicInputController extends InputController implements View.OnTouchListener {
+    private Activity mActivity;
 
     public BasicInputController(View view){
         view.findViewById(R.id.keypad_up).setOnTouchListener(this);
@@ -50,4 +54,5 @@ public class BasicInputController extends InputController implements View.OnTouc
             }
         }
         return false;}
+
 }

@@ -1,21 +1,18 @@
 package com.oneonetwoone.yass;
 
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.oneonetwoone.yass.InputControllers.InputController;
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class Player extends GameObject {
     private double mPositionX,mPositionY, mMaxX, mMaxY;
@@ -57,6 +54,7 @@ public class Player extends GameObject {
         mPositionY = mMaxY/2;
 
     }
+
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){
