@@ -22,4 +22,6 @@ public class InputController{
 
     }
 
+    public void onPreUpdate(){}
+
 }

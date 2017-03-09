@@ -2,7 +2,6 @@ package com.oneonetwoone.yass.InputControllers;
 
 import android.view.View;
 
-import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.YassActivity;
 
 public class CompositeInputController extends InputController {
@@ -14,6 +13,28 @@ public class CompositeInputController extends InputController {
         mVJoystickInputController= new VirtualJoystickInputController(view);
     }
 
+    public void onStart(){
+        mGamepadInputController.onStart();
+        mVJoystickInputController.onStart();
+
+    }
+
+    public void onStop(){
+        mGamepadInputController.onStop();
+        mVJoystickInputController.onStop();
+    }
+
+    public void onPause(){
+        mGamepadInputController.onPause();
+        mVJoystickInputController.onPause();
+    }
+
+    public void onResume(){
+        mGamepadInputController.onStart();
+        mVJoystickInputController.onPause();
+    }
+
+    @Override
     public void onPreUpdate(){
         mIsFiring=mGamepadInputController.mIsFiring || mVJoystickInputController.mIsFiring;
         mHorizontalFactor=mGamepadInputController.mHorizontalFactor + mVJoystickInputController.mHorizontalFactor;
