@@ -1,21 +1,18 @@
 package com.oneonetwoone.yass.engine;
 
-import android.graphics.Canvas;
-
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import static java.lang.System.currentTimeMillis;
 
 public class DrawThread extends Thread {
     private static int EXPECTED_FPS=50;
     private static final long TIME_BETWEEN_DRAWS=1000/EXPECTED_FPS;
     private GameEngine mGameEngine;
-    private Timer mTimer;
     public boolean mGameIsRunning, mPauseGame;
     Lock mLock=new ReentrantLock();
+
+    DrawThread(GameEngine gameEngine){
+        mGameEngine=gameEngine;
+    }
 
     @Override
     public void run() {

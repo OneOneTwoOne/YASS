@@ -7,7 +7,7 @@ public abstract class GameObject {
     public abstract void startGame();
     public abstract void onUpdate(long elapsedMillis,
                                   GameEngine gameEngine);
-    public abstract void onDraw();
+    public abstract void onDraw(Canvas canvas);
     public final Runnable mOnAddedRunnable = new Runnable() {
         @Override
         public void run() {
