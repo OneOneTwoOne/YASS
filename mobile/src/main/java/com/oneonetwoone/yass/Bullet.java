@@ -12,26 +12,14 @@ import com.oneonetwoone.yass.engine.GameObject;
 
 
 
-public class Bullet extends GameObject {
+public class Bullet extends Sprite {
     public ImageView mImageView;
-    private double mSpeedFactor, mImageHeight, mImageWidth, mPositionX, mPositionY;
+    private double mSpeedFactor, mPositionX, mPositionY;
     public Player mParent;
 
-    public Bullet(View view, double pixelFactor){
-        Context c = view.getContext();
-
-        mSpeedFactor= pixelFactor * -300d / 1000d;
-
-        mImageView= new ImageView(c);
-        Drawable bulletDrawable=c.getResources().getDrawable(R.drawable.bullet);
-
-        mImageHeight= bulletDrawable.getIntrinsicHeight()*pixelFactor;
-        mImageWidth= bulletDrawable.getIntrinsicWidth()*pixelFactor;
-
-        mImageView.setLayoutParams(new ViewGroup.LayoutParams((int) (mImageWidth),(int) (mImageHeight)));
-        mImageView.setImageDrawable(bulletDrawable);
-        mImageView.setVisibility(View.GONE);
-        ((FrameLayout) view).addView(mImageView);
+    public Bullet(GameEngine gameEngine){
+        super(gameEngine, R.drawable.bullet);
+        mSpeedFactor= gameEngine.mPixelFactor*-300d/1000d;
     }
 
     public void init(Player parent, double positionX, double positionY){
@@ -60,12 +48,4 @@ public class Bullet extends GameObject {
             mParent.releaseBullet(this);
         }
     }
-    @Override
-    public void onDraw(){
-
-       mImageView.setTranslationX((int) mPositionX);
-       mImageView.setTranslationY((int) mPositionY);
-    }
-
-
 }
