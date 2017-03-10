@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Canvas;
 
 
+import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.InputController;
 
 import java.util.ArrayList;
@@ -19,11 +20,25 @@ public class GameEngine {
     private DrawThread mDrawThread;
     private Activity mActivity;
     public InputController mInputController;
+    public GameView mGameView;
+    public double mPixelFactor;
+    public int mHeight,mWidth;
 
 
-    public GameEngine(Activity activity){
+    public GameEngine(Activity activity, GameView gameView){
         mActivity=activity;
+        mGameView = gameView;
+        mGameView.setGameObjects(mGameObjects);
+
+        mWidth= gameView.getWidth()
+                -gameView.getPaddingRight()-gameView.getPaddingLeft();
+        mHeight=gameView.getHeight()
+                -gameView.getPaddingTop()-gameView.getPaddingBottom();
+
+        mPixelFactor=mHeight/400d;
     }
+
+
     public void startGame(){
         stopGame();//Stops game if already running
         int numGameObjects = mGameObjects.size();
@@ -126,9 +141,7 @@ public class GameEngine {
         }
     };
 
-    public void onDraw(Canvas canvas){
-        mActivity.runOnUiThread(mDrawRunnable);
-    }
+    public void onDraw() {mGameView.draw();}
 
     public boolean isRunning(){
     return mUpdateThread != null&& mUpdateThread.isGameRunning();

@@ -1,6 +1,8 @@
 package com.oneonetwoone.yass.engine;
 
 
+import android.graphics.Canvas;
+
 public abstract class GameObject {
     public abstract void startGame();
     public abstract void onUpdate(long elapsedMillis,

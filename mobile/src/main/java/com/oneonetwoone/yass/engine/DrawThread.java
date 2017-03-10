@@ -4,37 +4,76 @@ import android.graphics.Canvas;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-public class DrawThread {
-    private static int EXPECTED_FPS=30;
+import static java.lang.System.currentTimeMillis;
+
+public class DrawThread extends Thread {
+    private static int EXPECTED_FPS=50;
     private static final long TIME_BETWEEN_DRAWS=1000/EXPECTED_FPS;
     private GameEngine mGameEngine;
     private Timer mTimer;
+    public boolean mGameIsRunning, mPauseGame;
+    Lock mLock=new ReentrantLock();
 
-    DrawThread(GameEngine gameEngine){mGameEngine=gameEngine;}
-    public void start(){
-        stopGame();
-        mTimer=new Timer();
-        mTimer.schedule(new TimerTask(){
-            @Override
-            public void run(){
-                mGameEngine.onDraw(new Canvas());
+    @Override
+    public void run() {
+        long previousTimeMillis=System.currentTimeMillis();
+        long currentTimeMillis;
+        long elapsedMillis;
+
+        while (mGameIsRunning) {
+            currentTimeMillis = System.currentTimeMillis();
+            elapsedMillis = currentTimeMillis - previousTimeMillis;
+            if (mPauseGame) {
+                while (mPauseGame) {
+                    try {
+                        synchronized (mLock) {
+                            mLock.wait();
+                        }
+                    } catch (InterruptedException e) {
+
+                    }
+                }
+                currentTimeMillis = System.currentTimeMillis();
             }
-        },0,TIME_BETWEEN_DRAWS);
-    }
+            if (elapsedMillis <TIME_BETWEEN_DRAWS){
+                try{
+                    Thread.sleep(TIME_BETWEEN_DRAWS-elapsedMillis);
+                }catch(InterruptedException e){
 
-    public void stopGame(){
-        if(mTimer!=null){
-            mTimer.cancel();
-            mTimer.purge();
+                }
+
+            }
+            mGameEngine.onDraw();
+            previousTimeMillis=currentTimeMillis;
         }
     }
 
     public void pauseGame(){
-        stopGame();
+        mPauseGame=true;
     }
 
     public void resumeGame(){
-        start();
+        if(mPauseGame==true){
+            mPauseGame=false;
+            synchronized (mLock){
+                mLock.notify();
+            }
+        }
     }
+
+    public void start(){
+        mGameIsRunning=true;
+        mPauseGame=false;
+        super.start();
+    }
+
+    public void stopGame(){
+        mGameIsRunning=false;
+        resumeGame();
+    }
+
+    public boolean isGameRunning(){return mGameIsRunning;}
 }
