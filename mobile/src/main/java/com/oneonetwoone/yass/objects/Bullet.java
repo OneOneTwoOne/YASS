@@ -1,5 +1,6 @@
 package com.oneonetwoone.yass.objects;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -9,7 +10,7 @@ import com.oneonetwoone.yass.engine.GameEngine;
 
 public class Bullet extends Sprite {
     public ImageView mImageView;
-    public double mSpeedFactor, mPositionX, mPositionY;
+    public double mSpeedFactor;
     public Player mParent;
 
     public Bullet(GameEngine gameEngine){

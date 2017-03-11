@@ -1,5 +1,6 @@
 package com.oneonetwoone.yass.objects;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.oneonetwoone.yass.InputControllers.InputController;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends Sprite {
-    private double mPositionX,mPositionY, mMaxX, mMaxY;
+    private double  mMaxX, mMaxY;
     private double mSpeedFactor;
     public ImageView mShip;
     public List<Bullet> mBullets;

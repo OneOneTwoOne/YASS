@@ -2,7 +2,6 @@ package com.oneonetwoone.yass.engine;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
 
 
 import com.oneonetwoone.yass.GameView;
@@ -13,8 +12,7 @@ import java.util.List;
 
 
 public class GameEngine {
-
-    private List<GameObject> mGameObjects= new ArrayList<>();
+    public static ArrayList<GameObject> mGameObjects;
     private List<GameObject> mObjectsToAdd= new ArrayList<>();
     private List<GameObject> mObjectsToRemove= new ArrayList<>();
     private UpdateThread mUpdateThread;
@@ -29,6 +27,7 @@ public class GameEngine {
     public GameEngine(Activity activity, GameView gameView){
         mActivity=activity;
         mGameView = gameView;
+        mGameObjects= new ArrayList<>();
         mGameView.setGameObjects(mGameObjects);
 
         mWidth= gameView.getWidth()
