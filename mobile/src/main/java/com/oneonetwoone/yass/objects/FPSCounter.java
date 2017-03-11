@@ -1,4 +1,4 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.objects;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,14 +7,10 @@ import android.graphics.Paint;
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
 
-/**
- * Created by Home on 10/03/2017.
- */
-
 public class FPSCounter extends GameObject {
-    private final double mPixelFactor;
     private final float mTextWidth;
     private final float mTextHeight;
+    private final double mPixelFactor;
 
     private Paint mPaint;
     private long mTotalMillis;
@@ -26,8 +22,9 @@ public class FPSCounter extends GameObject {
     public FPSCounter(GameEngine gameEngine){
         mPaint=new Paint();
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mTextHeight = (float) (25*gameEngine.mPixelFactor);
-        mTextWidth = (float) (50*gameEngine.mPixelFactor);
+        mPixelFactor= gameEngine.mPixelFactor;
+        mTextHeight = (float) (25*mPixelFactor);
+        mTextWidth = (float) (50*mPixelFactor);
         mPaint.setTextSize(mTextHeight/2);
     }
 

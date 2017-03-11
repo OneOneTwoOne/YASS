@@ -1,15 +1,10 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.objects;
 
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.oneonetwoone.yass.InputControllers.InputController;
+import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.engine.GameEngine;
-import com.oneonetwoone.yass.engine.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +12,9 @@ import java.util.List;
 public class Player extends Sprite {
     private double mPositionX,mPositionY, mMaxX, mMaxY;
     private double mSpeedFactor;
-    public TextView mTextView;
     public ImageView mShip;
-    public View mView;
     public List<Bullet> mBullets;
-    public int INITIAL_BULLET_POOL_AMOUNT=6;
+    public int INITIAL_BULLET_POOL_AMOUNT=0;
     public long TIME_BETWEEN_BULLETS=300;
     double mPixelFactor;
     long mTimeSinceLastFire;
@@ -84,6 +77,7 @@ public class Player extends Sprite {
     }
 
     private void initBulletPool(){
+        mBullets=new ArrayList<>();
         for (int i=0; i<INITIAL_BULLET_POOL_AMOUNT; i++){
             mBullets.add(new Bullet(mGameEngine));
         }

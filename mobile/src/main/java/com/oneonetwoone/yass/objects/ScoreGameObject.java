@@ -1,5 +1,6 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.objects;
 
+import android.graphics.Canvas;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ public class ScoreGameObject extends GameObject {
     }
 
     @Override
-    public void onDraw(){
+    public void onDraw(Canvas canvas){
         mText.setText(String.valueOf(mTotalMilis));
     }
 }

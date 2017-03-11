@@ -1,20 +1,15 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.objects;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.engine.GameEngine;
-import com.oneonetwoone.yass.engine.GameObject;
-
 
 
 public class Bullet extends Sprite {
     public ImageView mImageView;
-    private double mSpeedFactor, mPositionX, mPositionY;
+    public double mSpeedFactor, mPositionX, mPositionY;
     public Player mParent;
 
     public Bullet(GameEngine gameEngine){

@@ -1,4 +1,4 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.objects;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

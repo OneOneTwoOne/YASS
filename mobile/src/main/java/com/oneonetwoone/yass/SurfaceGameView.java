@@ -66,7 +66,7 @@ public class SurfaceGameView extends SurfaceView implements SurfaceHolder.Callba
         synchronized (mGameObjects){
             int numObjects= mGameObjects.size();
             for(int i=0; i <numObjects; i++){
-                mGameObjects.get(i).onDraw();
+               mGameObjects.get(i).onDraw(canvas);
             }
         }
         getHolder().unlockCanvasAndPost(canvas);

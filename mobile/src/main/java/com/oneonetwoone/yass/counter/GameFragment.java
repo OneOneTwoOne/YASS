@@ -1,20 +1,20 @@
 package com.oneonetwoone.yass.counter;
 
+import android.app.AlertDialog;
 import android.hardware.input.InputManager.InputDeviceListener;
 import android.view.View;
 
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
-import com.oneonetwoone.yass.FPSCounter;
+import com.oneonetwoone.yass.objects.FPSCounter;
 import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.CompositeInputController;
-import com.oneonetwoone.yass.Player;
+import com.oneonetwoone.yass.objects.Player;
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.YassActivity;
 import com.oneonetwoone.yass.YassBaseFragment;
@@ -77,7 +77,7 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 mGameEngine.stopGame();
-                                ((YassActivity)getActivity()).navigateBack();
+                                ((YassActivity) getActivity()).navigateBack();
                             }
                         })
                 .create()
