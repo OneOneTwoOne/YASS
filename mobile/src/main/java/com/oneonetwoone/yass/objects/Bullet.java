@@ -24,14 +24,14 @@ public class Bullet extends Sprite {
         mParent = parent;
     }
 
-    @Override
+    /*@Override
     public void onRemovedFromGameUiThread(){
         mImageView.setVisibility(View.GONE);
     }
     @Override
     public void onAddedToGameUiThread(){
         mImageView.setVisibility(View.VISIBLE);
-    }
+    }*/
 
 
     @Override

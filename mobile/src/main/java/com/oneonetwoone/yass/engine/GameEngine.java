@@ -2,6 +2,7 @@ package com.oneonetwoone.yass.engine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 
 import com.oneonetwoone.yass.GameView;
@@ -121,7 +122,6 @@ public class GameEngine {
                 mGameObjects.remove(mObjectsToRemove.remove(0));
             }
             while(!mObjectsToAdd.isEmpty()){
-
                 mGameObjects.add(mObjectsToAdd.remove(0));
             }
         }

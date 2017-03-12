@@ -15,16 +15,14 @@ public class Player extends Sprite {
     private double mSpeedFactor;
     public ImageView mShip;
     public List<Bullet> mBullets;
-    public int INITIAL_BULLET_POOL_AMOUNT=0;
+    public int INITIAL_BULLET_POOL_AMOUNT=6;
     public long TIME_BETWEEN_BULLETS=300;
-    protected final double mPixelFactor;
     long mTimeSinceLastFire;
     private GameEngine mGameEngine;
 
     public Player(GameEngine gameEngine){
         super(gameEngine, R.drawable.ship);
         mGameEngine=gameEngine;
-        mPixelFactor=mGameEngine.mPixelFactor;
         mSpeedFactor=mPixelFactor*100d/1000d;
 
         mMaxX = gameEngine.mWidth-mImageWidth;
@@ -68,9 +66,10 @@ public class Player extends Sprite {
         if (gameEngine.mInputController.mIsFiring && mTimeSinceLastFire > TIME_BETWEEN_BULLETS){
             Bullet b = getBullet();
             if (b == null){
+                Log.i("WH", "huuh");
                 return;
             }
-            b.init(this, mPositionX + mShip.getWidth()/2, mPositionY); //put bullet at top of ship, halfway thru width
+            b.init(this, mPositionX + mImageWidth/2, mPositionY); //put bullet at top of ship, halfway thru width
             gameEngine.addGameObject(b);
             mTimeSinceLastFire = 0;
         }
