@@ -13,7 +13,6 @@ import java.util.List;
 public class Player extends Sprite {
     private double  mMaxX, mMaxY;
     private double mSpeedFactor;
-    public ImageView mShip;
     public List<Bullet> mBullets;
     public int INITIAL_BULLET_POOL_AMOUNT=6;
     public long TIME_BETWEEN_BULLETS=300;

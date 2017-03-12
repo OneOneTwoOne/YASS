@@ -1,5 +1,7 @@
 package com.oneonetwoone.yass;
 
+import android.graphics.Canvas;
+
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
 import com.oneonetwoone.yass.objects.Asteroid;
@@ -14,8 +16,8 @@ import java.util.List;
 public class GameController extends GameObject {
     private long mCurrentMillis;
     private long mEnemiesSpawned;
-    private long TIME_BETWEEN_ENEMIES;
-    private List<Asteroid> mAsteroidPool= new ArrayList<Asteroid>;
+    private long TIME_BETWEEN_ENEMIES=2000;
+    private List<Asteroid> mAsteroidPool= new ArrayList<>();
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){
@@ -29,4 +31,9 @@ public class GameController extends GameObject {
             mEnemiesSpawned++;
         }
     }
+
+    public void returnToPool(){}
+
+    public void startGame(){}
+    public void onDraw(Canvas canvas){}
 }

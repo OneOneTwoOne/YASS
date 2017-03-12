@@ -10,6 +10,7 @@ import com.oneonetwoone.yass.InputControllers.InputController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class GameEngine {
@@ -23,6 +24,7 @@ public class GameEngine {
     public GameView mGameView;
     public double mPixelFactor;
     public int mHeight,mWidth;
+    public Random mRandom;
 
 
     public GameEngine(Activity activity, GameView gameView){
