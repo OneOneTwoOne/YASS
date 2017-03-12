@@ -8,6 +8,7 @@ import com.oneonetwoone.yass.R;
 public class VirtualJoystickInputController extends InputController {
     public double mMaxDistance;
 
+
     public VirtualJoystickInputController(View view){
         view.findViewById(R.id.vjoystick_main).setOnTouchListener(new VJoystickTouchListener());
         view.findViewById(R.id.vjoystick_touch).setOnTouchListener(new VFireButtonTouchListener());

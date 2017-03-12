@@ -3,21 +3,18 @@ package com.oneonetwoone.yass;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.oneonetwoone.yass.engine.GameObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
 
 
 public class SurfaceGameView extends SurfaceView implements SurfaceHolder.Callback, GameView{
 
-    private static ArrayList<GameObject> mGameObjects;
+    private static List<GameObject> mGameObjects;
     private boolean mReady;
 
     public SurfaceGameView(Context c){
@@ -50,7 +47,7 @@ public class SurfaceGameView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     @Override
-    public void setGameObjects(ArrayList<GameObject> gameObjects){
+    public void setGameObjects(List<GameObject> gameObjects){
         mGameObjects=gameObjects;
     }
 

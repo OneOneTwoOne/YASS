@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class GameEngine {
-    public static ArrayList<GameObject> mGameObjects;
+    public List<GameObject> mGameObjects= new ArrayList<>();
     private List<GameObject> mObjectsToAdd= new ArrayList<>();
     private List<GameObject> mObjectsToRemove= new ArrayList<>();
     private UpdateThread mUpdateThread;
@@ -27,11 +27,10 @@ public class GameEngine {
     public GameEngine(Activity activity, GameView gameView){
         mActivity=activity;
         mGameView = gameView;
-        mGameObjects= new ArrayList<>();
         mGameView.setGameObjects(mGameObjects);
 
         mWidth= gameView.getWidth()
-                -gameView.getPaddingRight()-gameView.getPaddingLeft();
+                -gameView.getPaddingRight()-gameView.getPaddingRight();
         mHeight=gameView.getHeight()
                 -gameView.getPaddingTop()-gameView.getPaddingBottom();
 

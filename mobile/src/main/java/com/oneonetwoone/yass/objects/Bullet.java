@@ -15,7 +15,7 @@ public class Bullet extends Sprite {
 
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.bullet);
-        mSpeedFactor= gameEngine.mPixelFactor*-300d/1000d;
+        mSpeedFactor= mPixelFactor*-300d/1000d;
     }
 
     public void init(Player parent, double positionX, double positionY){

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.oneonetwoone.yass.engine.GameObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
 
 public interface GameView {
     void draw();
-    void setGameObjects(ArrayList<GameObject> gameObjects);
+    void setGameObjects(List<GameObject> gameObjects);
     //Generic methods from View
     int getWidth();
     int getHeight();

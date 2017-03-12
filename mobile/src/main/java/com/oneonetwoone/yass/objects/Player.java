@@ -17,14 +17,16 @@ public class Player extends Sprite {
     public List<Bullet> mBullets;
     public int INITIAL_BULLET_POOL_AMOUNT=0;
     public long TIME_BETWEEN_BULLETS=300;
-    double mPixelFactor;
+    protected final double mPixelFactor;
     long mTimeSinceLastFire;
     private GameEngine mGameEngine;
 
     public Player(GameEngine gameEngine){
         super(gameEngine, R.drawable.ship);
-        mSpeedFactor=mPixelFactor*100d/1000d;
         mGameEngine=gameEngine;
+        mPixelFactor=mGameEngine.mPixelFactor;
+        mSpeedFactor=mPixelFactor*100d/1000d;
+
         mMaxX = gameEngine.mWidth-mImageWidth;
         mMaxY = gameEngine.mHeight-mImageHeight;
 

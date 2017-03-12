@@ -7,13 +7,12 @@ import android.view.View;
 
 import com.oneonetwoone.yass.engine.GameObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class StandardGameView extends View implements GameView{
 
-    private ArrayList<GameObject> mGameObjects;
+    private List<GameObject> mGameObjects;
 
 
     public StandardGameView(Context context){
@@ -44,7 +43,7 @@ public class StandardGameView extends View implements GameView{
     }
 
     @Override
-    public void setGameObjects(ArrayList<GameObject> gameObjects){
+    public void setGameObjects(List<GameObject> gameObjects){
         mGameObjects = gameObjects;
     }
 }
