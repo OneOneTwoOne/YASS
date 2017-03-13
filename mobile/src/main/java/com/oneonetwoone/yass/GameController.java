@@ -9,15 +9,21 @@ import com.oneonetwoone.yass.objects.Asteroid;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Home on 12/03/2017.
- */
-
 public class GameController extends GameObject {
     private long mCurrentMillis;
     private long mEnemiesSpawned;
-    private long TIME_BETWEEN_ENEMIES=2000;
+    private long TIME_BETWEEN_ENEMIES=500;
+    private int INIT_ASTERIOD_POOL_SIZE=8;
     private List<Asteroid> mAsteroidPool= new ArrayList<>();
+    private GameEngine mGameEngine;
+
+    public GameController(GameEngine gameEngine){
+        mGameEngine=gameEngine;
+
+        for(int i=0;i<INIT_ASTERIOD_POOL_SIZE;i++){
+            mAsteroidPool.add(new Asteroid(this,mGameEngine));
+        }
+    }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){
@@ -32,7 +38,9 @@ public class GameController extends GameObject {
         }
     }
 
-    public void returnToPool(){}
+    public void returnToPool(Asteroid asteroid){
+        mAsteroidPool.add(asteroid);
+    }
 
     public void startGame(){}
     public void onDraw(Canvas canvas){}

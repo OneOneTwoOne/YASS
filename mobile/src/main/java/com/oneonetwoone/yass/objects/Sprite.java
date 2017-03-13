@@ -10,10 +10,6 @@ import android.graphics.drawable.Drawable;
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
 
-/**
- * Created by Hugh on 10/03/2017.
- */
-
 public abstract class Sprite extends GameObject {
 
     protected double mPositionX;

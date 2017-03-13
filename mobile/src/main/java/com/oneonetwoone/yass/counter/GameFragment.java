@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.oneonetwoone.yass.GameController;
 import com.oneonetwoone.yass.objects.FPSCounter;
 import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.CompositeInputController;
@@ -47,6 +48,7 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
                     mGameEngine.setInputController(new CompositeInputController(getView(), (YassActivity) getActivity()));
                     mGameEngine.addGameObject(new Player(mGameEngine));
                     mGameEngine.addGameObject(new FPSCounter(mGameEngine));
+                    mGameEngine.addGameObject(new GameController(mGameEngine));
                     mGameEngine.startGame();
                 }
         });

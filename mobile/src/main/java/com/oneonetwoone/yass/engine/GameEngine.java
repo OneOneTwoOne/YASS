@@ -2,8 +2,6 @@ package com.oneonetwoone.yass.engine;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
-
 
 import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.InputController;
@@ -24,7 +22,7 @@ public class GameEngine {
     public GameView mGameView;
     public double mPixelFactor;
     public int mHeight,mWidth;
-    public Random mRandom;
+    public Random mRandom= new Random();
 
 
     public GameEngine(Activity activity, GameView gameView){

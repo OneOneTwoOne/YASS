@@ -6,7 +6,6 @@ import com.oneonetwoone.yass.engine.GameEngine;
 
 public class Asteroid extends Sprite {
     private final GameController mController;
-
     private final double mSpeed;
     private double mSpeedX, mSpeedY;
 
@@ -14,16 +13,6 @@ public class Asteroid extends Sprite {
         super(gameEngine, R.drawable.a10000);
         mSpeed = 200d*mPixelFactor/1000d;
         mController= gameController;
-    }
-
-    @Override
-    public void onUpdate(long elapsedMillis, GameEngine gameEngine){
-        mPositionX += mSpeedX * elapsedMillis;
-        mPositionY += mSpeedY * elapsedMillis;
-        if (mPositionY > gameEngine.mHeight) {
-            gameEngine.removeGameObject(this);
-            mController.returnToPool(this);
-        }
     }
 
     public void init(GameEngine gameEngine){
@@ -34,5 +23,15 @@ public class Asteroid extends Sprite {
         mPositionX=gameEngine.mRandom.nextInt(gameEngine.mWidth/2)+gameEngine.mWidth/4;
 
         mPositionY =-mImageHeight;
+    }
+
+    @Override
+    public void onUpdate(long elapsedMillis, GameEngine gameEngine){
+        mPositionX += mSpeedX * elapsedMillis;
+        mPositionY += mSpeedY * elapsedMillis;
+        if (mPositionY > gameEngine.mHeight) {
+            gameEngine.removeGameObject(this);
+            mController.returnToPool(this);
+        }
     }
 }

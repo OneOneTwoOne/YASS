@@ -11,6 +11,7 @@ public class ScoreGameObject extends GameObject {
     private final TextView mText;
     private long mTotalMilis;
 
+
     public ScoreGameObject(View view, int viewResId){
         mText = (TextView) view.findViewById(viewResId);
     }

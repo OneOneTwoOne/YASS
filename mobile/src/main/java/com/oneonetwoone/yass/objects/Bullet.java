@@ -1,15 +1,10 @@
 package com.oneonetwoone.yass.objects;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
-
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.engine.GameEngine;
 
 
 public class Bullet extends Sprite {
-    public ImageView mImageView;
     public double mSpeedFactor;
     public Player mParent;
 
@@ -33,9 +28,6 @@ public class Bullet extends Sprite {
         mImageView.setVisibility(View.VISIBLE);
     }*/
 
-
-    @Override
-    public void startGame(){}
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){
         mPositionY += (mSpeedFactor * elapsedMillis);
