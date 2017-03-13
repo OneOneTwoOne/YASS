@@ -19,6 +19,8 @@ public abstract class Sprite extends GameObject {
     private final Bitmap mBitmap;
     protected final int mImageHeight;
     protected final int mImageWidth;
+    protected int mRotation;
+    protected double mRotationSpeed;
 
     private final Matrix mMatrix = new Matrix();
 
@@ -35,10 +37,19 @@ public abstract class Sprite extends GameObject {
 
     @Override
     public void onDraw(Canvas canvas){
+        if(mPositionX>canvas.getWidth()
+                ||mPositionY>canvas.getWidth()
+                ||mPositionX<-mImageWidth
+                ||mPositionY<-mImageHeight){
+            return;
+        }
         mMatrix.reset();
         mMatrix.postScale((float)mPixelFactor, (float)mPixelFactor);
 
         mMatrix.postTranslate((float)mPositionX, (float)mPositionY);
+        mMatrix.postRotate((float) mRotation,
+                (float) (mPositionX + mImageWidth/2),
+                (float) (mPositionY + mImageWidth/2));
         canvas.drawBitmap(mBitmap, mMatrix, null);
     }
 }

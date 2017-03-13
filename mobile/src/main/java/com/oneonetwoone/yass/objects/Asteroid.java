@@ -23,6 +23,10 @@ public class Asteroid extends Sprite {
         mPositionX=gameEngine.mRandom.nextInt(gameEngine.mWidth/2)+gameEngine.mWidth/4;
 
         mPositionY =-mImageHeight;
+
+        mRotation= gameEngine.mRandom.nextInt(360);
+
+        mRotationSpeed = angle*(180d / Math.PI)/250d;
     }
 
     @Override
@@ -32,6 +36,13 @@ public class Asteroid extends Sprite {
         if (mPositionY > gameEngine.mHeight) {
             gameEngine.removeGameObject(this);
             mController.returnToPool(this);
+        }
+        mRotation += mRotationSpeed * elapsedMillis;
+        if (mRotation > 360){
+            mRotation=0;
+        }
+        else if (mRotation<0){
+            mRotation = 360;
         }
     }
 }
