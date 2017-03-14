@@ -1,4 +1,4 @@
-package com.oneonetwoone.yass;
+package com.oneonetwoone.yass.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,7 +13,6 @@ import com.oneonetwoone.yass.engine.GameObject;
 public class ParallaxBackground extends GameObject {
 
     protected double mImageHeight, mImageWidth, mScreenHeight, mScreenWidth, mTargetWidth, mSpeedY, mPixelFactor, mPositionY;
-    private final Matrix mMatrix= new Matrix();
     private final Bitmap mBitmap;
     private Rect mSrcRect =new Rect(), mDstRect=new Rect();
 
@@ -40,33 +39,20 @@ public class ParallaxBackground extends GameObject {
 
     @Override
     public void onDraw(Canvas canvas){
-        if (mPositionY > 0){
-            mMatrix.reset();
-            mMatrix.postScale((float) (mPixelFactor), (float)(mPixelFactor));
-            mMatrix.postTranslate(0, (float) (mPositionY - mImageHeight));
-            canvas.drawBitmap(mBitmap, mMatrix, null);
-        }
-        mMatrix.reset();
-        mMatrix.postScale((float)(mPixelFactor), (float) (mPixelFactor));
-        mMatrix.postTranslate(0,(float) mPositionY);
-        canvas.drawBitmap(mBitmap, mMatrix, null);
-
-        if(mPositionY>mScreenHeight){
-            mPositionY -= mImageHeight;
-        }
+        efficientDraw(canvas);
     }
 
     private void efficientDraw(Canvas canvas){
         if (mPositionY<0){
-            mSrcRect.set(
+            mSrcRect.set(  // has scale of image...
                     0,
-                    (int)(-mPositionY/mPixelFactor),
+                    (int)(-mPositionY/mPixelFactor/*...hence this.*/),
                     (int)(mTargetWidth/mPixelFactor),
-                    (int)((mScreenHeight - mPositionY)/mPixelFactor));
-            mDstRect.set(
+                    (int)((mScreenHeight - mPositionY)/mPixelFactor ));
+            mDstRect.set(  // has scale of GameView ...
                     0,
                     0,
-                    (int)mTargetWidth,
+                    (int)mTargetWidth,/*...hence this.*/
                     (int)mScreenHeight);
             canvas.drawBitmap(mBitmap,mSrcRect, mDstRect, null);
         }

@@ -8,13 +8,14 @@ import android.view.SurfaceView;
 
 import com.oneonetwoone.yass.engine.GameObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 
 public class SurfaceGameView extends SurfaceView implements SurfaceHolder.Callback, GameView{
-
-    private static List<GameObject> mGameObjects;
+    private List<List<GameObject>> mLayers;
+    private List<GameObject> mGameObjects;
     private boolean mReady;
 
     public SurfaceGameView(Context c){
@@ -61,10 +62,14 @@ public class SurfaceGameView extends SurfaceView implements SurfaceHolder.Callba
             return;
         }
         canvas.drawRGB(0,0,0);
-        synchronized (mGameObjects){
-            int numObjects= mGameObjects.size();
-            for(int i=0; i <numObjects; i++){
-               mGameObjects.get(i).onDraw(canvas);
+        synchronized (mLayers){
+            int numLayers= mLayers.size();
+            for (int i=0; i < numLayers; i++){
+                List<GameObject> currentLayer = mLayers.get(i);
+                int numObjects = currentLayer.size();
+                for(int j=0; j<numObjects; j++){
+                    currentLayer.get(j).onDraw(canvas);
+                }
             }
         }
         getHolder().unlockCanvasAndPost(canvas);

@@ -15,6 +15,7 @@ import com.oneonetwoone.yass.GameController;
 import com.oneonetwoone.yass.objects.FPSCounter;
 import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.CompositeInputController;
+import com.oneonetwoone.yass.objects.ParallaxBackground;
 import com.oneonetwoone.yass.objects.Player;
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.YassActivity;
@@ -23,6 +24,7 @@ import com.oneonetwoone.yass.engine.GameEngine;
 
 public class GameFragment extends YassBaseFragment implements View.OnClickListener, InputDeviceListener {
     private GameEngine mGameEngine;
+    private int SCROLLSPEED = 28;
 
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -46,6 +48,8 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
                     GameView gameView=(GameView) getView().findViewById(R.id.gameView);
                     mGameEngine = new GameEngine(getActivity(), gameView);
                     mGameEngine.setInputController(new CompositeInputController(getView(), (YassActivity) getActivity()));
+                    mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,20,R.drawable.space));
+                    mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,SCROLLSPEED,R.drawable.space2));
                     mGameEngine.addGameObject(new Player(mGameEngine));
                     mGameEngine.addGameObject(new FPSCounter(mGameEngine));
                     mGameEngine.addGameObject(new GameController(mGameEngine));

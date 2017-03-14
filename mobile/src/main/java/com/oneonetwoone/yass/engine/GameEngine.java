@@ -12,6 +12,7 @@ import java.util.Random;
 
 
 public class GameEngine {
+    private List<List<GameObject>> mLayers = new ArrayList<List<GameObject>>();
     public List<GameObject> mGameObjects= new ArrayList<>();
     private List<GameObject> mObjectsToAdd= new ArrayList<>();
     private List<GameObject> mObjectsToRemove= new ArrayList<>();
@@ -25,7 +26,7 @@ public class GameEngine {
     public Random mRandom= new Random();
 
 
-    public GameEngine(Activity activity, GameView gameView){
+    public GameEngine(Activity activity, GameView gameView, int numLayers){
         mActivity=activity;
         mGameView = gameView;
         mGameView.setGameObjects(mGameObjects);
@@ -36,6 +37,10 @@ public class GameEngine {
                 -gameView.getPaddingTop()-gameView.getPaddingBottom();
 
         mPixelFactor=mHeight/400d;
+
+        for (int i=0; i<numLayers; i++){
+            mLayers.add(new ArrayList<GameObject>());
+        }
     }
 
 
@@ -94,17 +99,7 @@ public class GameEngine {
         }
     }
 
-    public void addGameObject(final com.oneonetwoone.yass.engine.GameObject gameObject){
-        if(isRunning()){
 
-            mObjectsToAdd.add(gameObject);
-        }
-        else{
-
-            mGameObjects.add(gameObject);
-        }
-        mActivity.runOnUiThread(gameObject.mOnAddedRunnable);
-    }
 
     public void removeGameObject(final GameObject gameObject){
         mObjectsToRemove.add(gameObject);
@@ -113,18 +108,41 @@ public class GameEngine {
 
     public void onUpdate (long elapsedMillis){
         mInputController.onPreUpdate();
-        int numGameObjects = mGameObjects.size();
-        for(int i=0; i<numGameObjects; i++){
-            mGameObjects.get(i).onUpdate(elapsedMillis,this);
+        int numObjects = mGameObjects.size();
+        for(int i=0; i<numObjects; i++){
+            mGameObjects.get(i).onUpdate(elapsedMillis, this);
         }
-        synchronized(mGameObjects){
+        synchronized (mLayers){
             while(!mObjectsToRemove.isEmpty()){
-                mGameObjects.remove(mObjectsToRemove.remove(0));
+                GameObject objectToRemove= mObjectsToRemove.remove(0);
+                mGameObjects.remove(objectToRemove);
+                mLayers.get(objectToRemove.mLayer).remove(objectToRemove);
             }
             while(!mObjectsToAdd.isEmpty()){
-                mGameObjects.add(mObjectsToAdd.remove(0));
+                GameObject gameObject=mObjectsToAdd.remove(0);
+                addToLayerNow(gameObject);
             }
         }
+    }
+
+    public void addGameObject(final GameObject gameObject, int layer){
+        gameObject.mLayer = layer;
+        if (isRunning()){
+            mObjectsToAdd.add(gameObject);
+        }
+        else{
+            addToLayerNow(gameObject);
+        }
+        mActivity.runOnUiThread(gameObject.mOnAddedRunnable);
+    }
+
+    private void addToLayerNow(GameObject object){
+        int layer= object.mLayer;
+        while(mLayers.size()<= layer){
+            mLayers.add(new ArrayList<GameObject>());
+        }
+        mLayers.get(layer).add(object);
+        mGameObjects.add(object);
     }
 
 

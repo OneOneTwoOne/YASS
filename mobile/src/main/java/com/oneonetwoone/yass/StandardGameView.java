@@ -7,11 +7,12 @@ import android.view.View;
 
 import com.oneonetwoone.yass.engine.GameObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class StandardGameView extends View implements GameView{
-
+    private List<List<GameObject>> mLayers;
     private List<GameObject> mGameObjects;
 
 
@@ -31,9 +32,13 @@ public class StandardGameView extends View implements GameView{
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         synchronized (mGameObjects){
-            int numObjects = mGameObjects.size();
-            for (int i=0; i<numObjects; i++){
-                mGameObjects.get(i).onDraw(canvas);
+            int numLayers= mLayers.size();
+            for (int i=0; i < numLayers; i++){
+                List<GameObject> currentLayer = mLayers.get(i);
+                int numObjects = currentLayer.size();
+                for(int j=0; j<numObjects; j++){
+                    currentLayer.get(j).onDraw(canvas);
+                }
             }
         }
     }
