@@ -48,11 +48,11 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
                     GameView gameView=(GameView) getView().findViewById(R.id.gameView);
                     mGameEngine = new GameEngine(getActivity(), gameView,4);
                     mGameEngine.setInputController(new CompositeInputController(getView(), (YassActivity) getActivity()));
-                    mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,20,R.drawable.space));
-                    mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,SCROLLSPEED,R.drawable.space2));
-                    mGameEngine.addGameObject(new Player(mGameEngine));
-                    mGameEngine.addGameObject(new FPSCounter(mGameEngine));
-                    mGameEngine.addGameObject(new GameController(mGameEngine));
+                    mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,20,R.drawable.space),0);
+                    mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,SCROLLSPEED,R.drawable.space2),0);
+                    mGameEngine.addGameObject(new Player(mGameEngine),3);
+                    mGameEngine.addGameObject(new FPSCounter(mGameEngine),4);
+                    mGameEngine.addGameObject(new GameController(mGameEngine),1);
                     mGameEngine.startGame();
                 }
         });

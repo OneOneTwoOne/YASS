@@ -69,7 +69,7 @@ public class Player extends Sprite {
                 return;
             }
             b.init(this, mPositionX + mImageWidth/2, mPositionY); //put bullet at top of ship, halfway thru width
-            gameEngine.addGameObject(b);
+            gameEngine.addGameObject(b,2);
             mTimeSinceLastFire = 0;
         }
         else{

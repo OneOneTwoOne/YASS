@@ -29,7 +29,7 @@ public class GameEngine {
     public GameEngine(Activity activity, GameView gameView, int numLayers){
         mActivity=activity;
         mGameView = gameView;
-        mGameView.setGameObjects(mGameObjects);
+        mGameView.setGameObjects(mGameObjects, mLayers);
 
         mWidth= gameView.getWidth()
                 -gameView.getPaddingRight()-gameView.getPaddingRight();
