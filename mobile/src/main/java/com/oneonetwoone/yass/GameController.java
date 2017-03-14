@@ -33,7 +33,7 @@ public class GameController extends GameObject {
             //spawn enemy
             Asteroid a = mAsteroidPool.remove(0);
             a.init(gameEngine);
-            gameEngine.addGameObject(a);
+            gameEngine.addGameObject(a,2);
             mEnemiesSpawned++;
         }
     }
