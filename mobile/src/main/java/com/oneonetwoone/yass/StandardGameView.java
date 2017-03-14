@@ -31,7 +31,7 @@ public class StandardGameView extends View implements GameView{
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        synchronized (mGameObjects){
+        synchronized (mLayers){
             int numLayers= mLayers.size();
             for (int i=0; i < numLayers; i++){
                 List<GameObject> currentLayer = mLayers.get(i);
@@ -48,7 +48,8 @@ public class StandardGameView extends View implements GameView{
     }
 
     @Override
-    public void setGameObjects(List<GameObject> gameObjects){
-        mGameObjects = gameObjects;
+    public void setGameObjects(List<GameObject> gameObjects, List<List<GameObject>> layers){
+        mGameObjects=gameObjects;
+        mLayers=layers;
     }
 }

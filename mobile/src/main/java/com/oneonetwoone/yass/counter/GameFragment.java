@@ -46,7 +46,7 @@ public class GameFragment extends YassBaseFragment implements View.OnClickListen
                         obs.removeOnGlobalLayoutListener(this);
                     }
                     GameView gameView=(GameView) getView().findViewById(R.id.gameView);
-                    mGameEngine = new GameEngine(getActivity(), gameView);
+                    mGameEngine = new GameEngine(getActivity(), gameView,4);
                     mGameEngine.setInputController(new CompositeInputController(getView(), (YassActivity) getActivity()));
                     mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,20,R.drawable.space));
                     mGameEngine.addGameObject(new ParallaxBackground(mGameEngine,SCROLLSPEED,R.drawable.space2));

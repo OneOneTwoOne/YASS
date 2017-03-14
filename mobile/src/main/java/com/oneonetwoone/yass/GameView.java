@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface GameView {
     void draw();
-    void setGameObjects(List<GameObject> gameObjects);
+    void setGameObjects(List<GameObject> gameObjects, List<List<GameObject>> layers);
     //Generic methods from View
     int getWidth();
     int getHeight();

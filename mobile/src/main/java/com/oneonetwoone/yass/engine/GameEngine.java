@@ -119,8 +119,8 @@ public class GameEngine {
                 mLayers.get(objectToRemove.mLayer).remove(objectToRemove);
             }
             while(!mObjectsToAdd.isEmpty()){
-                GameObject gameObject=mObjectsToAdd.remove(0);
-                addToLayerNow(gameObject);
+                GameObject objectToAdd=mObjectsToAdd.remove(0);
+                addToLayerNow(objectToAdd);
             }
         }
     }

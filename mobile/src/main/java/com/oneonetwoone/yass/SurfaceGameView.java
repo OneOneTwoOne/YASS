@@ -48,8 +48,9 @@ public class SurfaceGameView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     @Override
-    public void setGameObjects(List<GameObject> gameObjects){
+    public void setGameObjects(List<GameObject> gameObjects, List<List<GameObject>> layers){
         mGameObjects=gameObjects;
+        mLayers=layers;
     }
 
     @Override
