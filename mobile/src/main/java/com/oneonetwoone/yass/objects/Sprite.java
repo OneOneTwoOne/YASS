@@ -10,15 +10,15 @@ import android.graphics.drawable.Drawable;
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
 
-public abstract class Sprite extends GameObject {
+public abstract class Sprite extends ScreenGameObject {
 
-    protected double mPositionX;
-    protected double mPositionY;
+    protected double mX;
+    protected double mY;
 
     protected final double mPixelFactor;
     private final Bitmap mBitmap;
-    protected final int mImageHeight;
-    protected final int mImageWidth;
+    protected final int mHeight;
+    protected final int mWidth;
     protected int mRotation;
     protected double mRotationSpeed;
 
@@ -29,27 +29,27 @@ public abstract class Sprite extends GameObject {
         Drawable spriteDrawable = r.getDrawable(drawableRes);
         mPixelFactor = gameEngine.mPixelFactor;
 
-        mImageHeight = (int)(spriteDrawable.getIntrinsicHeight()*mPixelFactor);
-        mImageWidth = (int)(spriteDrawable.getIntrinsicWidth()*mPixelFactor);
+        mHeight = (int)(spriteDrawable.getIntrinsicHeight()*mPixelFactor);
+        mWidth = (int)(spriteDrawable.getIntrinsicWidth()*mPixelFactor);
 
         mBitmap=((BitmapDrawable)spriteDrawable).getBitmap();
     }
 
     @Override
     public void onDraw(Canvas canvas){
-        if(mPositionX>canvas.getWidth()
-                ||mPositionY>canvas.getWidth()
-                ||mPositionX<-mImageWidth
-                ||mPositionY<-mImageHeight){
+        if(mX >canvas.getWidth()
+                ||mY>canvas.getWidth()
+                || mX <-mWidth
+                ||mY<-mHeight){
             return;
         }
         mMatrix.reset();
         mMatrix.postScale((float)mPixelFactor, (float)mPixelFactor);
 
-        mMatrix.postTranslate((float)mPositionX, (float)mPositionY);
+        mMatrix.postTranslate((float) mX, (float)mY);
         mMatrix.postRotate((float) mRotation,
-                (float) (mPositionX + mImageWidth/2),
-                (float) (mPositionY + mImageWidth/2));
+                (float) (mX + mWidth/2),
+                (float) (mY + mWidth/2));
         canvas.drawBitmap(mBitmap, mMatrix, null);
     }
 }

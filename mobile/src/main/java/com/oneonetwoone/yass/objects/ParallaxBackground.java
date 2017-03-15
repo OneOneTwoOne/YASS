@@ -2,7 +2,6 @@ package com.oneonetwoone.yass.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,9 +11,10 @@ import com.oneonetwoone.yass.engine.GameObject;
 
 public class ParallaxBackground extends GameObject {
 
-    protected double mImageHeight, mImageWidth, mScreenHeight, mScreenWidth, mTargetWidth, mSpeedY, mPixelFactor, mPositionY;
+    protected double mHeight, mWidth, mScreenHeight, mScreenWidth, mTargetWidth, mSpeedY, mPixelFactor, mY;
     private final Bitmap mBitmap;
     private Rect mSrcRect =new Rect(), mDstRect=new Rect();
+
 
     public ParallaxBackground(GameEngine gameEngine, int speed, int drawableResId){
         Drawable spriteDrawable = gameEngine.getContext().getResources().getDrawable(drawableResId);
@@ -23,18 +23,18 @@ public class ParallaxBackground extends GameObject {
         mPixelFactor= gameEngine.mPixelFactor;
         mSpeedY = speed*mPixelFactor/1000d;
 
-        mImageHeight=spriteDrawable.getIntrinsicHeight()*mPixelFactor;
-        mImageWidth=spriteDrawable.getIntrinsicWidth()*mPixelFactor;
+        mHeight =spriteDrawable.getIntrinsicHeight()*mPixelFactor;
+        mWidth =spriteDrawable.getIntrinsicWidth()*mPixelFactor;
 
         mScreenHeight = gameEngine.mHeight;
         mScreenWidth = gameEngine.mWidth;
 
-        mTargetWidth = Math.min(mImageWidth, mScreenWidth);
+        mTargetWidth = Math.min(mWidth, mScreenWidth);
     }
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){
-        mPositionY+=mSpeedY*elapsedMillis;
+        mY+=mSpeedY*elapsedMillis;
     }
 
     @Override
@@ -43,12 +43,12 @@ public class ParallaxBackground extends GameObject {
     }
 
     private void efficientDraw(Canvas canvas){
-        if (mPositionY<0){
+        if (mY<0){
             mSrcRect.set(  // has scale of image...
                     0,
-                    (int)(-mPositionY/mPixelFactor/*...hence this.*/),
+                    (int)(-mY/mPixelFactor/*...hence this.*/),
                     (int)(mTargetWidth/mPixelFactor),
-                    (int)((mScreenHeight - mPositionY)/mPixelFactor ));
+                    (int)((mScreenHeight - mY)/mPixelFactor ));
             mDstRect.set(  // has scale of GameView ...
                     0,
                     0,
@@ -61,28 +61,28 @@ public class ParallaxBackground extends GameObject {
                     0,
                     0,
                     (int) (mTargetWidth / mPixelFactor),
-                    (int) ((mScreenHeight - mPositionY) / mPixelFactor));
+                    (int) ((mScreenHeight - mY) / mPixelFactor));
             mDstRect.set(
                     0,
-                    (int) mPositionY,
+                    (int) mY,
                     (int) mTargetWidth,
                     (int) mScreenHeight);
             canvas.drawBitmap(mBitmap, mSrcRect, mDstRect, null);
             //we need to draw previous block
             mSrcRect.set(
                     0,
-                    (int) ((mImageHeight - mPositionY) / mPixelFactor),
+                    (int) ((mHeight - mY) / mPixelFactor),
                     (int) (mTargetWidth / mPixelFactor),
-                    (int) (mImageHeight / mPixelFactor));
+                    (int) (mHeight / mPixelFactor));
             mDstRect.set(
                     0,
                     0,
                     (int) mTargetWidth,
-                    (int) mPositionY);
+                    (int) mY);
             canvas.drawBitmap(mBitmap, mSrcRect, mDstRect, null);
         }
-        if (mPositionY > mScreenHeight) {
-            mPositionY-=mImageHeight;
+        if (mY > mScreenHeight) {
+            mY-= mHeight;
         }
     }
 }

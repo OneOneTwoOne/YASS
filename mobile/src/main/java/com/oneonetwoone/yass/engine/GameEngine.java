@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.InputController;
+import com.oneonetwoone.yass.objects.ScreenGameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class GameEngine {
     public double mPixelFactor;
     public int mHeight,mWidth;
     public Random mRandom= new Random();
+    private List<ScreenGameObject> mCollisionableObjects=new ArrayList<>();
 
 
     public GameEngine(Activity activity, GameView gameView, int numLayers){
@@ -119,8 +121,15 @@ public class GameEngine {
                 mLayers.get(objectToRemove.mLayer).remove(objectToRemove);
             }
             while(!mObjectsToAdd.isEmpty()){
+
                 GameObject objectToAdd=mObjectsToAdd.remove(0);
+
+                if (objectToAdd instanceof ScreenGameObject){
+                    mCollisionableObjects.add((ScreenGameObject)objectToAdd);
+
+                }
                 addToLayerNow(objectToAdd);
+
             }
         }
     }
@@ -132,6 +141,10 @@ public class GameEngine {
         }
         else{
             addToLayerNow(gameObject);
+            if (mObjectsToAdd instanceof ScreenGameObject){
+                mCollisionableObjects.add((ScreenGameObject) gameObject);
+
+            }
         }
         mActivity.runOnUiThread(gameObject.mOnAddedRunnable);
     }
@@ -158,6 +171,20 @@ public class GameEngine {
 
     public Context getContext(){
         return mActivity.getApplicationContext();
+    }
+
+    private void checkCollisions(){
+        int numObjects = mCollisionableObjects.size();
+        for (int i = 0; i < numObjects; i++){
+            ScreenGameObject objectA=mCollisionableObjects.get(i);
+            for (int j=0;j<numObjects;j++){
+                ScreenGameObject objectB = mCollisionableObjects.get(j);
+                if(objectA.checkCollision(objectB)){
+                    objectA.onCollision(this, objectB);
+                    objectB.onCollision(this, objectA);
+                }
+            }
+        }
     }
 }
 

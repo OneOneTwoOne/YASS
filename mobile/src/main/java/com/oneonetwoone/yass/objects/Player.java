@@ -1,7 +1,6 @@
 package com.oneonetwoone.yass.objects;
 
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.oneonetwoone.yass.InputControllers.InputController;
 import com.oneonetwoone.yass.R;
@@ -24,16 +23,16 @@ public class Player extends Sprite {
         mGameEngine=gameEngine;
         mSpeedFactor=mPixelFactor*100d/1000d;
 
-        mMaxX = gameEngine.mWidth-mImageWidth;
-        mMaxY = gameEngine.mHeight-mImageHeight;
+        mMaxX = gameEngine.mWidth-mWidth;
+        mMaxY = gameEngine.mHeight- mHeight;
 
         initBulletPool();
     }
 
     @Override
     public void startGame(){
-        mPositionX = mMaxX/2;
-        mPositionY = mMaxY/2;
+        mX = mMaxX/2;
+        mY = mMaxY/2;
 
     }
 
@@ -43,21 +42,21 @@ public class Player extends Sprite {
         updatePosition(elapsedMillis, gameEngine.mInputController);
         checkFiring(elapsedMillis, gameEngine);
         InputController inputController = gameEngine.mInputController;
-        mPositionX +=
+        mX +=
                 mSpeedFactor*(inputController.mHorizontalFactor*elapsedMillis);
-        if(mPositionX<0){
-            mPositionX=0;
+        if(mX <0){
+            mX =0;
         }
-        if(mPositionX>mMaxX){
-            mPositionX=mMaxX;
+        if(mX >mMaxX){
+            mX =mMaxX;
         }
-        mPositionY+=
+        mY+=
                 mSpeedFactor*(inputController.mVerticalFactor*elapsedMillis);
-        if(mPositionY<0){
-            mPositionY=0;
+        if(mY<0){
+            mY=0;
         }
-        if(mPositionY>mMaxY){
-            mPositionY=mMaxY;
+        if(mY>mMaxY){
+            mY=mMaxY;
         }
     }
 
@@ -68,7 +67,7 @@ public class Player extends Sprite {
                 Log.i("WH", "huuh");
                 return;
             }
-            b.init(this, mPositionX + mImageWidth/2, mPositionY); //put bullet at top of ship, halfway thru width
+            b.init(this, mX + mWidth/2, mY); //put bullet at top of ship, halfway thru width
             gameEngine.addGameObject(b,2);
             mTimeSinceLastFire = 0;
         }
@@ -97,4 +96,12 @@ public class Player extends Sprite {
 
     public void updatePosition(long ellapsedMillis, InputController inputController){}
 
+    @Override
+    public void onCollision(GameEngine gameEngine, ScreenGameObject otherObject){
+        if(otherObject instanceof Asteroid){
+            removeObject(gameEngine);
+            Asteroid a = (Asteroid) otherObject;
+            a.removeObject(gameEngine);
+        }
+    }
 }

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="leanback-v17-24.2.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/35686e6f7e0e02cf043549184cf41babb22579e6/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/35686e6f7e0e02cf043549184cf41babb22579e6/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/9effe9faf4b6338175c1047fea6e5c6f86ae3c0d/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/9effe9faf4b6338175c1047fea6e5c6f86ae3c0d/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
