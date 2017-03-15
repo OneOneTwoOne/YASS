@@ -1,6 +1,7 @@
 package com.oneonetwoone.yass.objects;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 
 import com.oneonetwoone.yass.engine.GameEngine;
@@ -19,16 +20,34 @@ public class ScreenGameObject extends GameObject {
     public Rect mBoundingRect=new Rect(-1,-1,-1,-1);
 
     public boolean checkCollision(ScreenGameObject otherObject){
-        return false;
+
+        return checkRectangularCollision(otherObject);
+    }
+
+    private boolean checkRectangularCollision(ScreenGameObject other){
+        return Rect.intersects(mBoundingRect, other.mBoundingRect);
     }
 
     public void onCollision(GameEngine gameEngine, ScreenGameObject sgo){
 
     }
     @Override
-    public void onDraw(Canvas canvas){}
+    public void onDraw(Canvas canvas){
+
+    }
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){}
 
-    public void removeObject(){}
+    public void removeObject(GameEngine gameEngine){
+        gameEngine.removeGameObject(this);
+    }
+
+    public void onPostUpdate(GameEngine gameEngine){
+        mBoundingRect.set(
+                (int)mX,
+                (int)mY,
+                (int)mX+mWidth,
+                (int)mY+mHeight
+        );
+    }
 }

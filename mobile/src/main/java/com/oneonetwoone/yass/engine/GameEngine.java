@@ -132,6 +132,10 @@ public class GameEngine {
 
             }
         }
+        for (ScreenGameObject sgo:mCollisionableObjects){
+            sgo.onPostUpdate(this);
+
+        }
     }
 
     public void addGameObject(final GameObject gameObject, int layer){

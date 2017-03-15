@@ -3,7 +3,9 @@ package com.oneonetwoone.yass.objects;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -21,6 +23,7 @@ public abstract class Sprite extends ScreenGameObject {
     protected final int mWidth;
     protected int mRotation;
     protected double mRotationSpeed;
+    private Paint mPaint=new Paint();
 
     private final Matrix mMatrix = new Matrix();
 
@@ -43,6 +46,8 @@ public abstract class Sprite extends ScreenGameObject {
                 ||mY<-mHeight){
             return;
         }
+        mPaint.setColor(Color.YELLOW);
+        canvas.drawRect(mBoundingRect,mPaint);
         mMatrix.reset();
         mMatrix.postScale((float)mPixelFactor, (float)mPixelFactor);
 
