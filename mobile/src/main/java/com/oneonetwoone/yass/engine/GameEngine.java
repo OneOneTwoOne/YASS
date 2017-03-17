@@ -2,6 +2,7 @@ package com.oneonetwoone.yass.engine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.InputController;
@@ -116,7 +117,9 @@ public class GameEngine {
         }
         synchronized (mLayers){
             while(!mObjectsToRemove.isEmpty()){
+
                 GameObject objectToRemove= mObjectsToRemove.remove(0);
+                mCollisionableObjects.remove(objectToRemove);
                 mGameObjects.remove(objectToRemove);
                 mLayers.get(objectToRemove.mLayer).remove(objectToRemove);
             }
@@ -132,10 +135,12 @@ public class GameEngine {
 
             }
         }
+
         for (ScreenGameObject sgo:mCollisionableObjects){
-            sgo.onPostUpdate(this);
+            sgo.onPostUpdate();
 
         }
+        checkCollisions();
     }
 
     public void addGameObject(final GameObject gameObject, int layer){
@@ -145,7 +150,7 @@ public class GameEngine {
         }
         else{
             addToLayerNow(gameObject);
-            if (mObjectsToAdd instanceof ScreenGameObject){
+            if (gameObject instanceof ScreenGameObject){
                 mCollisionableObjects.add((ScreenGameObject) gameObject);
 
             }

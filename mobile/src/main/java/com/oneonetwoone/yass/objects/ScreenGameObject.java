@@ -3,6 +3,7 @@ package com.oneonetwoone.yass.objects;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.oneonetwoone.yass.engine.GameEngine;
 import com.oneonetwoone.yass.engine.GameObject;
@@ -26,10 +27,11 @@ public class ScreenGameObject extends GameObject {
 
     private boolean checkRectangularCollision(ScreenGameObject other){
         return Rect.intersects(mBoundingRect, other.mBoundingRect);
+
+
     }
 
     public void onCollision(GameEngine gameEngine, ScreenGameObject sgo){
-
     }
     @Override
     public void onDraw(Canvas canvas){
@@ -42,7 +44,7 @@ public class ScreenGameObject extends GameObject {
         gameEngine.removeGameObject(this);
     }
 
-    public void onPostUpdate(GameEngine gameEngine){
+    public void onPostUpdate(){
         mBoundingRect.set(
                 (int)mX,
                 (int)mY,

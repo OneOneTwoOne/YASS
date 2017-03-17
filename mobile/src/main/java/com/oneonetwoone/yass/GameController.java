@@ -13,7 +13,7 @@ public class GameController extends GameObject {
     private long mCurrentMillis;
     private long mEnemiesSpawned;
     private long TIME_BETWEEN_ENEMIES=500;
-    private int INIT_ASTERIOD_POOL_SIZE=8;
+    private int INIT_ASTERIOD_POOL_SIZE=12;
     private List<Asteroid> mAsteroidPool= new ArrayList<>();
     private GameEngine mGameEngine;
 

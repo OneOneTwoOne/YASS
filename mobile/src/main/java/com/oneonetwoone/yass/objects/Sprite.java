@@ -8,19 +8,12 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-
 import com.oneonetwoone.yass.engine.GameEngine;
-import com.oneonetwoone.yass.engine.GameObject;
 
 public abstract class Sprite extends ScreenGameObject {
 
-    protected double mX;
-    protected double mY;
-
     protected final double mPixelFactor;
     private final Bitmap mBitmap;
-    protected final int mHeight;
-    protected final int mWidth;
     protected int mRotation;
     protected double mRotationSpeed;
     private Paint mPaint=new Paint();
@@ -39,18 +32,18 @@ public abstract class Sprite extends ScreenGameObject {
     }
 
     @Override
-    public void onDraw(Canvas canvas){
-        if(mX >canvas.getWidth()
-                ||mY>canvas.getWidth()
-                || mX <-mWidth
-                ||mY<-mHeight){
+    public void onDraw(Canvas canvas) {
+        if (mX > canvas.getWidth()
+                || mY > canvas.getHeight()
+                || mX < -mWidth
+                || mY < -mHeight) {
             return;
         }
+
         mPaint.setColor(Color.YELLOW);
-        canvas.drawRect(mBoundingRect,mPaint);
+        canvas.drawRect(mBoundingRect, mPaint);
         mMatrix.reset();
         mMatrix.postScale((float)mPixelFactor, (float)mPixelFactor);
-
         mMatrix.postTranslate((float) mX, (float)mY);
         mMatrix.postRotate((float) mRotation,
                 (float) (mX + mWidth/2),

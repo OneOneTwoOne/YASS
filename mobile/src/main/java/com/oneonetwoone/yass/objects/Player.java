@@ -12,10 +12,10 @@ import java.util.List;
 public class Player extends Sprite {
     private double  mMaxX, mMaxY;
     private double mSpeedFactor;
-    public List<Bullet> mBullets;
-    public int INITIAL_BULLET_POOL_AMOUNT=6;
-    public long TIME_BETWEEN_BULLETS=300;
-    long mTimeSinceLastFire;
+    private List<Bullet> mBullets;
+    private int INITIAL_BULLET_POOL_AMOUNT=6;
+    private long TIME_BETWEEN_BULLETS=300;
+    private long mTimeSinceLastFire;
     private GameEngine mGameEngine;
 
     public Player(GameEngine gameEngine){
@@ -64,7 +64,6 @@ public class Player extends Sprite {
         if (gameEngine.mInputController.mIsFiring && mTimeSinceLastFire > TIME_BETWEEN_BULLETS){
             Bullet b = getBullet();
             if (b == null){
-                Log.i("WH", "huuh");
                 return;
             }
             b.init(this, mX + mWidth/2, mY); //put bullet at top of ship, halfway thru width
