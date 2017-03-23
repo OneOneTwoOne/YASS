@@ -14,7 +14,7 @@ import java.util.Random;
 
 
 public class GameEngine {
-    private List<List<GameObject>> mLayers = new ArrayList<List<GameObject>>();
+    private List<List<GameObject>> mLayers = new ArrayList<>();
     public List<GameObject> mGameObjects= new ArrayList<>();
     private List<GameObject> mObjectsToAdd= new ArrayList<>();
     private List<GameObject> mObjectsToRemove= new ArrayList<>();
@@ -102,11 +102,8 @@ public class GameEngine {
         }
     }
 
-
-
     public void removeGameObject(final GameObject gameObject){
         mObjectsToRemove.add(gameObject);
-        mActivity.runOnUiThread(gameObject.mOnRemovedRunnable);
     }
 
     public void onUpdate (long elapsedMillis){
@@ -186,7 +183,7 @@ public class GameEngine {
         int numObjects = mCollisionableObjects.size();
         for (int i = 0; i < numObjects; i++){
             ScreenGameObject objectA=mCollisionableObjects.get(i);
-            for (int j=0;j<numObjects;j++){
+            for (int j=i+1;j<numObjects;j++){
                 ScreenGameObject objectB = mCollisionableObjects.get(j);
                 if(objectA.checkCollision(objectB)){
                     objectA.onCollision(this, objectB);

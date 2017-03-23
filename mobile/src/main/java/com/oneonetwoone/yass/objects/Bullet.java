@@ -1,5 +1,8 @@
 package com.oneonetwoone.yass.objects;
 
+import android.util.Log;
+import android.view.View;
+
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.engine.GameEngine;
 
@@ -19,21 +22,12 @@ public class Bullet extends Sprite {
         mParent = parent;
     }
 
-    /*@Override
-    public void onRemovedFromGameUiThread(){
-        mImageView.setVisibility(View.GONE);
-    }
-    @Override
-    public void onAddedToGameUiThread(){
-        mImageView.setVisibility(View.VISIBLE);
-    }*/
-
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine){
         mY += (mSpeedFactor * elapsedMillis);
         if(mY < -mHeight){
-            gameEngine.removeGameObject(this);
             mParent.releaseBullet(this);
+            removeObject(gameEngine);
         }
     }
 
@@ -43,6 +37,13 @@ public class Bullet extends Sprite {
             removeObject(gameEngine);
             Asteroid a = (Asteroid) otherObject;
             a.removeObject(gameEngine);
+            a.returnToPool();
         }
+    }
+
+    @Override
+    public void removeObject(GameEngine gameEngine){
+        super.removeObject(gameEngine);
+        mParent.releaseBullet(this);
     }
 }

@@ -14,7 +14,7 @@ public abstract class Sprite extends ScreenGameObject {
 
     protected final double mPixelFactor;
     private final Bitmap mBitmap;
-    protected int mRotation;
+    protected double mRotation;
     protected double mRotationSpeed;
     private Paint mPaint=new Paint();
 
@@ -29,6 +29,7 @@ public abstract class Sprite extends ScreenGameObject {
         mWidth = (int)(spriteDrawable.getIntrinsicWidth()*mPixelFactor);
 
         mBitmap=((BitmapDrawable)spriteDrawable).getBitmap();
+        mRadius=Math.max(mHeight, mWidth)/2;
     }
 
     @Override
@@ -41,13 +42,18 @@ public abstract class Sprite extends ScreenGameObject {
         }
 
         mPaint.setColor(Color.YELLOW);
-        canvas.drawRect(mBoundingRect, mPaint);
+        //canvas.drawRect(mBoundingRect, mPaint);
+        canvas.drawCircle(
+                (int) (mX + mWidth/2),
+                (int) (mY+mHeight/2),
+                (int) mRadius,
+                mPaint);
         mMatrix.reset();
         mMatrix.postScale((float)mPixelFactor, (float)mPixelFactor);
         mMatrix.postTranslate((float) mX, (float)mY);
         mMatrix.postRotate((float) mRotation,
                 (float) (mX + mWidth/2),
-                (float) (mY + mWidth/2));
+                (float) (mY + mHeight/2));
         canvas.drawBitmap(mBitmap, mMatrix, null);
     }
 }

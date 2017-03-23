@@ -8,23 +8,26 @@ public class Asteroid extends Sprite {
     private final GameController mController;
     private final double mSpeed;
     private double mSpeedX, mSpeedY;
+    public int mNum;
 
-    public Asteroid(GameController gameController, GameEngine gameEngine){
+    public Asteroid(GameController gameController, GameEngine gameEngine, int num){
         super(gameEngine, R.drawable.a10000);
+        mNum=num;
         mSpeed = 200d*mPixelFactor/1000d;
         mController= gameController;
     }
 
     public void init(GameEngine gameEngine){
+
         double angle= gameEngine.mRandom.nextDouble()*Math.PI/3d-Math.PI/6d;
         mSpeedX = mSpeed*Math.sin(angle);
         mSpeedY = mSpeed*Math.cos(angle);
 
-        mX =gameEngine.mRandom.nextInt(gameEngine.mWidth/2)+gameEngine.mWidth/4;
+        mX = gameEngine.mRandom.nextInt(gameEngine.mWidth/2)+gameEngine.mWidth/4;
 
-        mY =-mHeight;
+        mY = -mHeight;
 
-        mRotation= gameEngine.mRandom.nextInt(360);
+        mRotation= (gameEngine.mRandom.nextInt(360));
 
         mRotationSpeed = angle*(180d / Math.PI)/250d;
     }
@@ -34,8 +37,8 @@ public class Asteroid extends Sprite {
         mX += mSpeedX * elapsedMillis;
         mY += mSpeedY * elapsedMillis;
         if (mY > gameEngine.mHeight) {
-            gameEngine.removeGameObject(this);
-            mController.returnToPool(this);
+            removeObject(gameEngine);
+            returnToPool();
         }
         mRotation += mRotationSpeed * elapsedMillis;
         if (mRotation > 360){
@@ -44,5 +47,14 @@ public class Asteroid extends Sprite {
         else if (mRotation<0){
             mRotation = 360;
         }
+    }
+    public void returnToPool(){
+        mController.returnToPool(this);
+
+    }
+    @Override
+    public void removeObject(GameEngine gameEngine){
+        super.removeObject(gameEngine);
+        returnToPool();
     }
 }
