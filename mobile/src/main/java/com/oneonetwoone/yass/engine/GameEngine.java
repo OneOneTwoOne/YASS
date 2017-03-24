@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import com.oneonetwoone.yass.BodyType;
 import com.oneonetwoone.yass.GameView;
 import com.oneonetwoone.yass.InputControllers.InputController;
 import com.oneonetwoone.yass.objects.ScreenGameObject;
@@ -125,8 +126,10 @@ public class GameEngine {
                 GameObject objectToAdd=mObjectsToAdd.remove(0);
 
                 if (objectToAdd instanceof ScreenGameObject){
-                    mCollisionableObjects.add((ScreenGameObject)objectToAdd);
-
+                    ScreenGameObject sgo = (ScreenGameObject) objectToAdd;
+                    if(sgo.mBodyType != BodyType.None){
+                        mCollisionableObjects.add(sgo);
+                    }
                 }
                 addToLayerNow(objectToAdd);
 

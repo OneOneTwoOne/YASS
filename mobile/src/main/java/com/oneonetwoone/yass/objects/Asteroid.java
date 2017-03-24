@@ -4,15 +4,16 @@ import com.oneonetwoone.yass.GameController;
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.engine.GameEngine;
 
+import static com.oneonetwoone.yass.objects.ScreenGameObject.BodyType.Circular;
+
 public class Asteroid extends Sprite {
     private final GameController mController;
     private final double mSpeed;
     private double mSpeedX, mSpeedY;
-    public int mNum;
 
     public Asteroid(GameController gameController, GameEngine gameEngine, int num){
         super(gameEngine, R.drawable.a10000);
-        mNum=num;
+        mBodyType=Circular;
         mSpeed = 200d*mPixelFactor/1000d;
         mController= gameController;
     }

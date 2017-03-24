@@ -8,6 +8,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import com.oneonetwoone.yass.BodyType;
 import com.oneonetwoone.yass.engine.GameEngine;
 
 public abstract class Sprite extends ScreenGameObject {
@@ -42,12 +44,15 @@ public abstract class Sprite extends ScreenGameObject {
         }
 
         mPaint.setColor(Color.YELLOW);
-        //canvas.drawRect(mBoundingRect, mPaint);
-        canvas.drawCircle(
-                (int) (mX + mWidth/2),
-                (int) (mY+mHeight/2),
-                (int) mRadius,
-                mPaint);
+        if(mBodyType== BodyType.Rectangular){
+            canvas.drawRect(mBoundingRect, mPaint);}
+        else if(mBodyType== BodyType.Circular){
+            canvas.drawCircle(
+                    (int) (mX + mWidth/2),
+                    (int) (mY+mHeight/2),
+                    (int) mRadius,
+                    mPaint);}
+
         mMatrix.reset();
         mMatrix.postScale((float)mPixelFactor, (float)mPixelFactor);
         mMatrix.postTranslate((float) mX, (float)mY);

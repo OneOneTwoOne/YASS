@@ -6,6 +6,9 @@ import android.view.View;
 import com.oneonetwoone.yass.R;
 import com.oneonetwoone.yass.engine.GameEngine;
 
+import static com.oneonetwoone.yass.objects.ScreenGameObject.BodyType.Circular;
+import static com.oneonetwoone.yass.objects.ScreenGameObject.BodyType.Rectangular;
+
 
 public class Bullet extends Sprite {
     public double mSpeedFactor;
@@ -13,6 +16,7 @@ public class Bullet extends Sprite {
 
     public Bullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.bullet);
+        mBodyType=Rectangular;
         mSpeedFactor= mPixelFactor*-300d/1000d;
     }
 

@@ -9,6 +9,8 @@ import com.oneonetwoone.yass.engine.GameEngine;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.oneonetwoone.yass.objects.ScreenGameObject.BodyType.Circular;
+
 public class Player extends Sprite {
     private double  mMaxX, mMaxY;
     private double mSpeedFactor;
@@ -18,8 +20,10 @@ public class Player extends Sprite {
     private long mTimeSinceLastFire;
     private GameEngine mGameEngine;
 
+
     public Player(GameEngine gameEngine){
         super(gameEngine, R.drawable.ship);
+        mBodyType=Circular;
         mGameEngine=gameEngine;
         mSpeedFactor=mPixelFactor*100d/1000d;
 
